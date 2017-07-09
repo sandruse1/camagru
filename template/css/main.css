@@ -1,0 +1,369 @@
+body{
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    width: 100%;
+    height: 100vh;
+    min-width: 450px;
+    background-size: cover;
+    background-image: url("../img/congruent_pentagon.png");
+}
+
+hr{
+    height: 3px;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    background-color: #9dc498;
+    border: none;
+}
+
+div.top {
+    min-width: 450px;
+    display: inline-block;
+    width: 100%;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    opacity: 0.8;
+    background-color: #c1f4cf;
+    height: auto;
+    text-align: center;
+}
+
+div.p {
+    min-width: 450px;
+    float: left;
+    width: 400px;
+    height: 5vh;
+    margin-left: 3vw;
+    display: block;
+}
+
+div.p p{
+    font-size: 60px;
+    margin-top: -0.7vh;
+    font-family: cursive;
+    font-weight: bold;
+    text-shadow:
+            1px 1px 0px #c4dbe2,
+            2px 2px 0px #b4d1d9,
+            3px 3px 0px #a6c6cf,
+            4px 4px 0px #94b8c3,
+            5px 5px 0px #87aeb9,
+            6px 6px 0px #7aa3af,
+            7px 7px 0px #6d97a3,
+            8px 8px 0px #618b98,
+            9px 9px 0px #56818e,
+            10px 10px 0px #4c7683,
+            15px 15px 25px rgba(0,0,0,.9);
+    transition: .5s ease-in-out;
+}
+
+div.hr{
+    float: left;
+    width: 100%;
+}
+
+div.menu{
+    margin-top: 0.5vh;
+    display: block;
+    height: 4vh;
+    float: right;
+    width: auto;
+}
+
+div.top input{
+    width: auto;
+}
+
+
+div.main{
+margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    min-width: 320px;
+    width: 100%;
+    height: auto;
+    min-height: 88.78vh;
+    text-align: center;
+}
+
+div.main p{
+    font-size: 28px;
+    font-family: cursive;
+
+}
+
+div.bot{
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    height:5.4vh;
+    opacity: 0.8;
+    background-color: #c1f4cf;
+    text-align: right;
+    width: 100%;
+
+
+}
+
+div.bot p{
+
+    padding-right: 1vw;
+    font-family:sans-serif;
+    color:gray;
+    font-weight: bold;
+}
+
+/*-----------------------------------------------------------*/
+
+div.frame{
+    width: 150px;
+    height: 500px;
+    float: left;
+    margin-top: 5vh;
+}
+
+div.frame img{
+    background-color: #9dc498;
+    width: 100px;
+    height: 150px;
+    border: 3px solid darkgreen;
+}
+/*------------------------------------------------*/
+div.booth {
+    width: 400px;
+    height: auto;
+    background: #283926;
+    border: 10px solid #9dc498;
+    margin-top: 5vh;
+    text-align: center;
+}
+
+div.else{
+    width: 400px;
+    height: auto;
+    text-align: center;
+}
+
+div.all{
+    margin: 0 0 0 0;
+    padding: auto auto auto auto;
+    width: auto;
+    height: auto;
+    display: inline-block;
+    min-height: 88.78vh;
+    text-align: center;
+}
+
+div.center{
+
+    padding: 0 0 0 0;
+    width: 430px;
+    max-height: 1200px;
+    height: auto;
+    display: inline-block;
+    margin-right: 5vw;
+    margin-left: 5vw;
+    text-align: center;
+    float: left;
+}
+
+.photo_div{
+    width: 400px;
+    height: 400px;
+    background: #283926;
+    border: 10px solid #9dc498;
+    margin-top: 5vh;
+    text-align: center;
+}
+
+ img.photo_divka{
+     margin-top: 13%;
+ }
+
+.booth-capture-button {
+    display: none;
+    margin-left: 32%;
+    border: 3px solid #283926;
+    background: #9dc498;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    width: 140px;
+}
+
+.file-upload {
+    top: 11px;
+    left: 105px;
+    position: relative; /* Даем возможность делать позиционирование, внутри данного элемента */
+    overflow: hidden; /* Все что выходит за пределы - скрываем */
+    border-radius: 10px;
+    padding: 8px 4px;
+    color: #283926;
+    text-align: center;
+    margin: 5px;
+    padding: 5px;
+    border: 3px solid #283926;
+    padding: 10px 20px;
+    background: #9dc498;
+    height: 25px;
+    width: 140px;
+    font-size: 25px;
+    box-shadow: 0 5px 10px black;
+}
+
+.file-upload label {
+    /* Растягиваем label на всю возможную площадь блока .file-upload */
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+#yes,#no {
+    margin: 10px 0;
+    border: 3px solid #283926;
+    padding: 10px 20px;
+    background: #9dc498;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    width: 140px;
+}
+
+#frame1_v{
+    display: none;
+    position: relative;
+    top: -904px;
+    left: 10px;
+}
+
+#frame1_v2{
+    display: none;
+    position: relative;
+    top: -545px;
+    left: 10px;
+}
+/*_______________________________________________*/
+
+div#groop{
+    float: left;
+    display: inline-block;
+    width: 300px;
+    height: 600px;
+    margin-top: 5vh;
+    text-align: center;
+}
+
+div.user_g{
+    text-align: center;
+    height: 400px;
+    width: 300px;
+    background: #9dc498;
+    border: 2px solid #283926;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-snap-points-y: repeat(400px);
+    scroll-snap-type: mandatory;
+    float: left;
+}
+
+div.user_g img{
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    border: 1px solid white;
+    margin: 5px;
+}
+
+div#delete_from_g{
+    display: none;
+}
+
+/*-------------------------------------------------------*/
+#canvas {
+    display: none;
+}
+
+.file-upload input[type="file"]{
+    display: none; /* Обязательно скрываем настоящий Input File */
+}
+.file-upload input[type="submit"]{
+    display: none; /* Обязательно скрываем настоящий Input File */
+}
+.file-upload span {
+    line-height: 36px; /* Делаем вертикальное выравнивание текста, который написан на кнопке */
+}
+
+.file-upload:hover {
+    background: #7aad55;
+}
+
+#save_to_g{
+    display: none;
+}
+
+#groop p{
+    font-size: 20px;
+}
+
+
+
+a {
+    opacity: 0.9;
+    color: #283926;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 10px;
+    font-size: 30px;
+    background-color: #69DBA2; /* Цвет обычной ссылки */
+    text-decoration: none; /* Убираем подчеркивание у ссылок */
+}
+
+p{
+    color: #283926;
+}
+
+a:visited {
+    color: #283926;
+}
+
+a:hover {
+    border: 3px solid #58A118;
+    background-color: #9dc498; /* Цвет ссылки при наведении на нее курсора мыши */
+}
+
+input[type=submit] {
+    background-color: #58A118;
+}
+
+input{
+    margin: 0 5px;
+    outline: none;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 35px;
+    box-shadow: 0 5px 10px black;
+}
+
+input:hover{
+    box-shadow: 0 5px 10px yellow;
+}
+
+input:focus {
+    border: 3px solid #58A118;
+}
+
+input[type=file] {
+    width: 200px;
+    background-color: #58A118;
+    font-size: 25px;
+}
+
+video{
+    transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -ms-transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+}

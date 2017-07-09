@@ -1,0 +1,168 @@
+body{
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-image: url("../img/congruent_pentagon.png");
+}
+
+hr{
+    height: 3px;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    background-color: #9dc498;
+    border: none;
+}
+
+div.p {
+
+    float: left;
+    width: 200px;
+    height: 5vh;
+    margin-left: 3vw;
+    display: block;
+}
+
+
+div.top {
+
+    display: inline-block;
+    width: 100%;
+
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    opacity: 0.8;
+    background-color: #c1f4cf;
+    height: auto;
+    text-align: center;
+}
+
+div.hr{
+    float: left;
+    width: 100%;
+}
+
+div.menu{
+    margin-top: 1vh;
+    margin-left: 0;
+    display: block;
+    height: 4vh;
+    float: right;
+    width: 250px;
+}
+
+div.p p{
+    font-size: 50px;
+    margin: 0;
+    font-family: cursive;
+    font-weight: bold;
+    text-shadow:
+            1px 1px 0px #c4dbe2,
+            2px 2px 0px #b4d1d9,
+            3px 3px 0px #a6c6cf,
+            4px 4px 0px #94b8c3,
+            5px 5px 0px #87aeb9,
+            6px 6px 0px #7aa3af,
+            7px 7px 0px #6d97a3,
+            8px 8px 0px #618b98,
+            9px 9px 0px #56818e,
+            10px 10px 0px #4c7683,
+            15px 15px 25px rgba(0,0,0,.9);
+    transition: .5s ease-in-out;
+}
+
+div.main{
+    background-image: url("../img/imgonline-com-ua-Resize-aBa9H4YYV7Q1Az03.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    min-width: 820px;
+    width: 100%;
+    height: 88.78vh;
+    text-align: center;
+}
+
+div.img{
+
+    position: absolute;
+    top: 40vh;
+    text-align: center;
+    width: 100%;    
+}
+
+div.forrm{
+
+    display: inline-block;
+    min-width: 900px;
+    text-align: center;
+    width: 100vw;
+}
+
+div.forrm form{
+    opacity: 0.9;
+    text-align: center;
+}
+
+div.main p{
+    font-size: 28px;
+    font-family: cursive;
+    padding-top: 0px;
+}
+
+div.bot{
+    height:5.5vh;
+    opacity: 0.8;
+    background-color: #c1f4cf;
+    text-align: right;
+}
+
+div.bot p{
+    padding-right: 1vw;
+    font-family:sans-serif;
+    color:gray;
+    font-weight: bold;
+}
+
+a {
+    opacity: 0.9;
+    color: #283926;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 10px;
+    font-size: 30px;
+    background-color: #69DBA2; /* Цвет обычной ссылки */
+    text-decoration: none; /* Убираем подчеркивание у ссылок */
+}
+
+a:visited {
+    color: #283926;
+}
+
+a:hover {
+    border: 3px solid #58A118;
+    background-color: #9dc498; /* Цвет ссылки при наведении на нее курсора мыши */
+}
+
+input[type=submit] {
+    width: 25vw;
+    max-width: 400px;
+    min-width: 300px;
+    background-color: #58A118;
+}
+
+input{
+    outline: none;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 33px;
+    width: 55vw;
+    max-width: 800px;
+    min-width: 600px;
+    box-shadow: 0 5px 10px black;
+}
+input:hover{
+    box-shadow: 0 5px 10px yellow;
+}
+input:focus {
+    border: 3px solid #58A118;
+}
