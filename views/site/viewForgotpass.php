@@ -6,6 +6,13 @@
  * Time: 18:06
  */
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./template/css/index.css">
+    <title>Camagru Forgot password</title>
+</head>
 <div class="top">
     <div class="p"><p>Reset the password</p></div>
     <div class="menu">
@@ -29,8 +36,8 @@
         </div>
    </div>
 </div>
-<div class="bot">
-    <hr>
-<p>© 2017 Camagru</p>
-</div>
-<script src="../js/massage.js"></script>
+<?php
+require_once (ROOT.'/views/site/viewFooter');
+?>
+</body>
+</html>

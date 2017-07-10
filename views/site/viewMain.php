@@ -71,3 +71,7 @@
         </div>
     </div>
 </div>
+
+<?php
+require_once (ROOT.'/views/site/viewFooter');
+?>

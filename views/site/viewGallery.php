@@ -1,8 +1,8 @@
 <?php
-include 'add_img_to_gallery.php';
-$dir = '../gallery/';
-$images = get_img($dir);
-require_once 'pagination.php';
+//include 'add_img_to_gallery.php';
+//$dir = '../gallery/';
+//$images = get_img($dir);
+//require_once 'pagination.php';
 
 ?>
 
@@ -30,27 +30,27 @@ require_once 'pagination.php';
 
 <div class="main">
     <p>з jquery в js</p>
-<div class="wrapper">
-    <div class="gallery">
-        <?php if ($images): $i = $start_pos + 1; ?>
-        <?php for($j = $start_pos; $j < $end_pos; $j++):?>
-        <div class="item">
-            <div>
-                <img class="front" src="<?=$dir.$images[$j]?>" onclick="show_hidden(this.src)" alt="photo">
-                <img class="back" src="../img/sandruse.png" onclick="show_hidden('<?=$dir.$images[$j]?>')" alt="icon">
-            </div>
+    <div class="wrapper">
+        <div class="gallery">
+            <?php if ($images): $i = $start_pos + 1; ?>
+                <?php for($j = $start_pos; $j < $end_pos; $j++):?>
+                    <div class="item">
+                        <div>
+                            <img class="front" src="<?=$dir.$images[$j]?>" onclick="show_hidden(this.src)" alt="photo">
+                            <img class="back" src="../img/sandruse.png" onclick="show_hidden('<?=$dir.$images[$j]?>')" alt="icon">
+                        </div>
+                    </div>
+                    <?php $i++; endfor; ?>
+            <?php else: ?>
+                <p>В даній галереї немає жодної фотографії</p>
+            <?php endif; ?>
+            <?php if($count_pages > 1): ?>
+                <div class="clear"></div>
+                <div class="pagination"><?=$pagination?></div>
+            <?php endif; ?>
         </div>
-        <?php $i++; endfor; ?>
-        <?php else: ?>
-        <p>В даній галереї немає жодної фотографії</p>
-        <?php endif; ?>
-        <?php if($count_pages > 1): ?>
-            <div class="clear"></div>
-            <div class="pagination"><?=$pagination?></div>
-        <?php endif; ?>
-    </div>
 
-</div>
+    </div>
 
 </div>
 <div class="hidden" id="hidden">

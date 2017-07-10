@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,9 +9,9 @@
 <div class="top">
     <div class="p"><p>CAMAGRU MAIN</p> </div>
     <div class="menu">
-        <a href="../php/gallery.php">Gallery</a>
-        <a href="singup.html">Sign up</a>
-        <a href="login.html">Login</a>
+        <a href="gallery">Gallery</a>
+        <a href="singup">Sign up</a>
+        <a href="login">Login</a>
     </div>
     <div class="hr">
         <hr>
@@ -21,10 +20,8 @@
 <div id="form" class="main">
 
 </div>
-<div class="bot">
-    <hr>
-    <p>© 2017 Camagru</p>
-</div>
-<script src="./js/massage.js"></script>
+<?php
+require_once (ROOT.'/views/site/viewFooter.php');
+?>
 </body>
 </html>

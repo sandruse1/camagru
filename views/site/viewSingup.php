@@ -1,17 +1,16 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: sandruse
- * Date: 10.07.17
- * Time: 11:40
- */
-?>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./template/css/singup.css">
+    <title>Camagru Singup</title>
+</head>
+<body>
 <div class="top">
     <div class="p"><p>Sign Up</p></div>
     <div class="menu">
-        <a href="index.html">Exit</a>
-        <a href="login.html">Login</a>
+        <a href="camagru">Back</a>
+        <a href="login">Login</a>
     </div>
     <div class="hr">
         <hr>
@@ -19,7 +18,8 @@
 </div>
 <div class="main">
     <div class="img">
-        <div class="forrm"><form id="form" method="POST" action="../php/singup.php">
+        <div class="forrm">
+            <form id="form" method="POST" onsubmit=" ">
                 <input type="email" name="email" placeholder="Email"/>
                 <br><br>
                 <input type="text" name="login" placeholder="User name"/>
@@ -27,11 +27,12 @@
                 <input type="password" name="passwd" placeholder="Password"/><br><br>
                 <input type="password" name="conf_passwd" placeholder="Confirm Password"/><br><br>
                 <input type="submit" name="submit" value="Sign up"/>
-            </form></div>
+            </form>
+        </div>
     </div>
 </div>
-<div class="bot">
-    <hr>
-    <p>© 2017 Camagru</p>
-</div>
-<script src="../js/massage.js"></script>
+<?php
+require_once (ROOT.'/views/site/viewFooter.php');
+?>
+</body>
+</html>

@@ -1,12 +1,18 @@
 <?php
-    require_once (ROOT.'/views/site/viewHeader');
 ?>
-
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="./template/css/singup.css">
+        <title>Camagru Login</title>
+    </head>
+    <body>
 <div class="top">
     <div class="p"><p>Login</p></div>
     <div class="menu">
-        <a href="index.html">Exit</a>
-        <a href="singup.html">Sign up</a>
+        <a href="camagru">Back</a>
+        <a href="singup">Sign up</a>
     </div>
     <div class="hr">
         <hr>
@@ -25,12 +31,6 @@
         </div>
     </div>
 </div>
-<div class="bot">
-    <hr>
-<p>© 2017 Camagru</p>
-</div>
-<script src="../js/massage.js"></script>
-
 <?php
-    require_once (ROOT.'/views/site/viewFooter');
+    require_once (ROOT.'/views/site/viewFooter.php');
 ?>
