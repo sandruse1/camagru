@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/login.css">
+<?php
+    require_once (ROOT.'/views/site/viewHeader');
+?>
 
-    <title>Camagru Login</title>
-</head>
-<body>
 <div class="top">
     <div class="p"><p>Login</p></div>
     <div class="menu">
@@ -35,10 +30,7 @@
 <p>© 2017 Camagru</p>
 </div>
 <script src="../js/massage.js"></script>
-</body>
-</html>
 
-
-
-<!--галерея js-->
-<!--загрузка фото-->
+<?php
+    require_once (ROOT.'/views/site/viewFooter');
+?>

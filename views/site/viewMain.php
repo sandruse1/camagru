@@ -1,11 +1,4 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Take pictures from your webcam</title>
 
-</head>
-<body>
 <div class="top">
     <div class="p"> <p>CAMAGRU</p></div>
     <div class="menu">
@@ -78,12 +71,3 @@
         </div>
     </div>
 </div>
-
-<div class="bot">
-    <hr>
-    <p>© 2017 Camagru</p>
-</div>
-<script src="../js/main.js"></script>
-<link rel="stylesheet" href="../css/main.css">
-</body>
-</html>

@@ -29,7 +29,7 @@ var xmlgallery = new XMLHttpRequest(),
 
 
 
-xxx.open("POST", "../php/main.php", true);
+xxx.open("POST", "../php/viewMain.php", true);
 xxx.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 xxx.send("user_name=" + "1");
 xxx.onreadystatechange = function () {

@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/forgot_pass.css">
-    <title>Camagru forgot password</title>
-</head>
-<body>
+<?php
+/**
+ * Created by PhpStorm.
+ * User: sandruse
+ * Date: 09.07.17
+ * Time: 18:06
+ */
+?>
 <div class="top">
     <div class="p"><p>Reset the password</p></div>
     <div class="menu">
@@ -34,5 +34,3 @@
 <p>© 2017 Camagru</p>
 </div>
 <script src="../js/massage.js"></script>
-</body>
-</html>
