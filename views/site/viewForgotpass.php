@@ -37,7 +37,7 @@
    </div>
 </div>
 <?php
-require_once (ROOT.'/views/site/viewFooter');
+require_once (ROOT.'/views/site/viewFooter.php');
 ?>
 </body>
 </html>

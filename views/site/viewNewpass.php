@@ -1,32 +1,11 @@
 <?php
-error_reporting(-1);
-ini_set('display_errors','on');
-
-require_once 'create_db.php';
-require_once 'func_pdo.php';
-$data = $_POST;
-$login = $_GET['login'];
-
-if (isset($data['submit'])) {
-    $pass = $_POST['new_passwd'];
-    $pass2 = $_POST['new_passwd2'];
-    if ($pass2 != NULL && $pass != NULL) {
-        $pass = hash('whirlpool', $pass);
-        $pass2 = hash('whirlpool', $pass2);
-        if ($pass2 === $pass) {
-            $sql = "UPDATE `user` SET passwd = '$pass' WHERE login = '$login'";
-            $result = $pdo->prepare($sql);
-            $result->execute();
-           header('Location: ../html/index.html?pass_changed');
-        } else {
-            header("Location: new_pass.php?login=".$login."&error=1");
-        }
-    } else {
-        header("Location: new_pass.php?login=".$login."&error=2");
-    }
-}
+/**
+ * Created by PhpStorm.
+ * User: sandruse
+ * Date: 11.07.17
+ * Time: 15:58
+ */
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,12 +38,10 @@ if (isset($data['submit'])) {
         </div>
     </div>
 
-    
+
 </div>
-<div class="bot">
-    <hr>
-<p>© 2017 Camagru</p>
-</div>
-<script src="../js/massage.js"></script>
+<?php
+require_once (ROOT.'/views/site/viewFooter.php');
+?>
 </body>
 </html>
