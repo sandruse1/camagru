@@ -33,40 +33,58 @@ class accountModel
         }
     }
 
-    public static function valid_login($login)
-    {
-        $value = htmlspecialchars(trim($login));
-        $value = preg_match('/^[A-Za-z0-9 ]{3,20}$/i',$value);
-        return (strlen($value) > 16 || strlen($value) < 4) ? 0 : 1 ;
+    public static function valid_login_singup($login) {
+        $pdo = Db::getConnection();
+        $login_user = "SELECT * FROM `user` WHERE `login` = '$login'";
+        $login_exists = $pdo->prepare($login_user)->execute()->fetchAll();
+        $value = preg_match('/^[A-Za-z0-9 ]{3,20}$/i',htmlspecialchars(trim($login)));
+        return (strlen($value) > 16 || strlen($value) < 4 || $login_exists != NULL) ? 0 : 1 ;
     }
 
-    public static function valid_passwd($passwd)
-    {
-        if(!preg_match("/[\d\w]{8,20}/i", trim($passwd)))
+    public static function valid_login_login($login){
+        $pdo = Db::getConnection();
+        $login_user = "SELECT * FROM `user` WHERE `login` = ?";
+        $result_login = $pdo->prepare($login_user);
+        $result_login->execute([$login]);
+        $login_exists = $result_login->fetchAll();
+        if ($login_exists == NULL)
+            return 0;
+        return 1;
+    }
+
+    public static function valid_passwd_singup($passwd, $conf_pass)    {
+        if(!preg_match("/[\d\w]{8,20}/i", trim($passwd)) || $passwd != $conf_pass)
             return 0;
         else
             return 1;
     }
 
-    public static function valid_email($mail){
-        if (filter_var($mail, FILTER_VALIDATE_EMAIL))
+    public static function valid_passwd_login($pass){
+
+
+    }
+
+    public static function valid_email_singup($mail){
+        $pdo = Db::getConnection();
+        $mail_user = "SELECT * FROM `user` WHERE `email` = '$mail'";
+        $mail_exists = $pdo->prepare($mail_user)->execute()->fetchAll();
+        if (filter_var($mail, FILTER_VALIDATE_EMAIL) && $mail_exists == NULL)
             return 1;
         else
             return 0;
     }
 
-    public static function send_mail_forgot($login, $email)
-    {
+    public static function send_mail_forgot($login, $email) {
         $subject = "Camagru: зміна пароля";
-        $message = "Добрий день!\nВаш логин на сайті Camagru: " . $login . "\n
-                Для зміни пароля перейдіть за посиланням:\n
+        $message = "Добрий день!\nВаш логин на сайті Camagru: " . $login . "\n Для зміни пароля перейдіть за посиланням:\n
                 http://e1r1p7:8080/projects/camagru/php/new_pass.php?login=".$login."\n\n
                 З повагою адміністратор, власник і всемогутній куратор сайта Camagru";
         mail($email, $subject, $message);
     }
 
-    public static function send_mail($login, $pdo, $email)
+    public static function send_mail($login,$email)
     {
+        $pdo = Db::getConnection();
         $activ = "SELECT id FROM `user` WHERE login = '$login'";
         $result = $pdo->prepare($activ);
         $result->execute();
