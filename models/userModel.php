@@ -13,39 +13,11 @@ class userModel
     }
 
 
-    public static function Login($login, $pass)
+    public static function Login($login)
     {
-        $pdo = Db::getConnection();
-        $pass = hash('whirlpool', $pass);
-
-
-                $activ = "SELECT passwd FROM `user` WHERE login = '$login'";
-                $result = $pdo->prepare($activ);
-                $result->execute();
-                $activation = $result->fetch(PDO::FETCH_ASSOC);
-                $base_pass = $activation['passwd'];
-
-                $activ1 = "SELECT enter FROM `user` WHERE login = '$login'";
-                $result1 = $pdo->prepare($activ1);
-                $result1->execute();
-                $activation1 = $result1->fetch(PDO::FETCH_ASSOC);
-                $enter = $activation1['enter'];
-
-                if ($base_pass != $pass || $login_exists == NULL) {
-                    if ($login_exists == NULL)
-                        header('Location: ../html/login.html?error=1');
-                    else
-                        header('Location: ../html/login.html?error=2');
-                    } else if ($enter == "1") {
-                        session_start();
-                        $_SESSION['logged_user'] = $login;
-
-                        header('Location: ../html/main.html');
-
-                    } else
-                        header('Location: ../html/login.html?error=4');
-
-
+        session_start();
+        $_SESSION['logged_user'] = $login;
+        header('Location: http://localhost:8080/camagru/main');
     }
 
     public static function UserSettings(){

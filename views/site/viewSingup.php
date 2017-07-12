@@ -19,7 +19,7 @@
 <div class="main">
     <div class="img">
         <div class="forrm">
-            <form id="form" method="POST" onsubmit=" ">
+            <form id="form" method="POST" action="do_singup">
                 <input type="email" name="email" placeholder="Email"/>
                 <br><br>
                 <input type="text" name="login" placeholder="User name"/>

@@ -11,13 +11,8 @@ class accountModel
     public static function userActivation(){
         $pdo = Db::getConnection();
         if(isset($_GET['act']) AND isset($_GET['login'])) {
-            $act = $_GET['act'];
-            $act = stripslashes($act);
-            $act = htmlspecialchars($act);
-
-            $login = $_GET['login'];
-            $login = stripslashes($login);
-            $login = htmlspecialchars($login);
+            $act = htmlspecialchars(stripslashes($_GET['act']));
+            $login = htmlspecialchars(stripslashes($_GET['login']));
         }
         $activ = "SELECT id FROM `user` WHERE login = '$login'";
         $result = $pdo->prepare($activ);
@@ -36,7 +31,9 @@ class accountModel
     public static function valid_login_singup($login) {
         $pdo = Db::getConnection();
         $login_user = "SELECT * FROM `user` WHERE `login` = '$login'";
-        $login_exists = $pdo->prepare($login_user)->execute()->fetchAll();
+        $login_exists = $pdo->prepare($login_user);
+        $login_exists = $login_exists->execute();
+        $login_exists = $login_exists->fetchAll();
         $value = preg_match('/^[A-Za-z0-9 ]{3,20}$/i',htmlspecialchars(trim($login)));
         return (strlen($value) > 16 || strlen($value) < 4 || $login_exists != NULL) ? 0 : 1 ;
     }
@@ -59,9 +56,29 @@ class accountModel
             return 1;
     }
 
-    public static function valid_passwd_login($pass){
+    public static function valid_passwd_login($pass, $login){
+        $pdo = Db::getConnection();
+        $pass = hash('whirlpool', $pass);
+        $activ = "SELECT passwd FROM `user` WHERE login = '$login'";
+        $result = $pdo->prepare($activ);
+        $result->execute();
+        $activation = $result->fetch(PDO::FETCH_ASSOC);
+        $base_pass = $activation['passwd'];
+        if ($base_pass == $pass)
+            return 1;
+        return 0;
+    }
 
-
+    public static function valid_confirm_from_mail($login){
+        $pdo = Db::getConnection();
+        $activ1 = "SELECT enter FROM `user` WHERE login = '$login'";
+        $result1 = $pdo->prepare($activ1);
+        $result1->execute();
+        $activation1 = $result1->fetch(PDO::FETCH_ASSOC);
+        $enter = $activation1['enter'];
+        if ($enter == "1")
+            return 1;
+        return 0;
     }
 
     public static function valid_email_singup($mail){

@@ -9,6 +9,7 @@
 return array(
     'camagru/gallery' => 'site/gallery',
     'camagru/singup' => 'site/singup',
+    'camagru/do_singup' => 'user/singup',
     'camagru/login' => 'site/login',
     'camagru/exit' => 'site/exit',
     'camagru' => 'site/startpage', //actionIndex в SiteController

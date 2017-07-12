@@ -13,7 +13,7 @@ class Db
         $params = include($paramsPath);
 
         try {
-            $dsn = "mysql:host={$params['host']};dbname={$params['dbname']}";
+            $dsn = "mysql:host={$params['host']};dbname=";
             $pdo = new PDO($dsn, $params['user'], $params['password']);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }catch (PDOException $e){
@@ -21,7 +21,13 @@ class Db
             exit();
         }
 
-        $pdo->query('CREATE DATABASE IF NOT EXISTS camagru');
+        $query = 'CREATE DATABASE IF NOT EXISTS `camagru`';
+        try {
+            $pdo->query($query);
+        } catch (PDOException $e)        {
+            echo "Error: Can't CREATE DataBase - ".$e;
+            exit();
+        }
 
         try {
             $pdo = new PDO("mysql:host={$params['host']};dbname={$params['dbname']}", $params['user'], $params['password']);

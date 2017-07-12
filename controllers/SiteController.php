@@ -4,8 +4,10 @@ include_once ROOT.'/models/siteModel.php';
 
 class SiteController
 {
+
     public function actionStartpage()
     {
+        siteModel::CreateDB();
         require_once(ROOT.'/views/site/viewStartpage.php');
         return true;
     }
