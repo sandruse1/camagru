@@ -3,7 +3,7 @@
 
 class userModel
 {
-    public static function Singup($login, $pass, $conf_pass, $mail){
+    public static function Singup($login, $pass, $mail){
         $pdo = Db::getConnection();
         //заносим юзера в базу даних
         $sql = "INSERT INTO `user` (login, passwd, email, enter) VALUES (?, ?, ?, ?)";

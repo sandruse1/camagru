@@ -32,10 +32,13 @@ class accountModel
         $pdo = Db::getConnection();
         $login_user = "SELECT * FROM `user` WHERE `login` = '$login'";
         $login_exists = $pdo->prepare($login_user);
-        $login_exists = $login_exists->execute();
+        $login_exists->execute();
         $login_exists = $login_exists->fetchAll();
         $value = preg_match('/^[A-Za-z0-9 ]{3,20}$/i',htmlspecialchars(trim($login)));
-        return (strlen($value) > 16 || strlen($value) < 4 || $login_exists != NULL) ? 0 : 1 ;
+        if (strlen($value) > 16 || strlen($value) < 4 || $login_exists != NULL){
+        echo "login_error";    return 0;
+        }
+        return 1;
     }
 
     public static function valid_login_login($login){
@@ -48,6 +51,11 @@ class accountModel
             return 0;
         return 1;
     }
+
+//1 Whenever, Wherever by Shakira
+//2 Boys Bound Here by Blake Shelton
+//3 Love Somebody by Adam Levine/Maroon 5
+//4 Without You by Usher﻿
 
     public static function valid_passwd_singup($passwd, $conf_pass)    {
         if(!preg_match("/[\d\w]{8,20}/i", trim($passwd)) || $passwd != $conf_pass)
