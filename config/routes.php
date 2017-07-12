@@ -12,5 +12,8 @@ return array(
     'camagru/do_singup' => 'user/singup',
     'camagru/login' => 'site/login',
     'camagru/exit' => 'site/exit',
+    'camagru/check_singup' => 'user/singup_valid',
+    'camagru/check_login' => 'user/login_valid',
+
     'camagru' => 'site/startpage', //actionIndex в SiteController
 );

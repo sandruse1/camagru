@@ -1,3 +1,5 @@
+<?php
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,20 +21,23 @@
 <div class="main">
     <div class="img">
         <div class="forrm">
-            <form id="form" method="POST" action="do_singup">
-                <input type="email" name="email" placeholder="Email"/>
+            <p id="massege"> </p>
+            <form id="form">
+                <input type="email" id="email" name="email" placeholder="Email"/>
                 <br><br>
-                <input type="text" name="login" placeholder="User name"/>
+                <input type="text" id="login" name="login" placeholder="User name"/>
                 <br><br>
-                <input type="password" name="passwd" placeholder="Password"/><br><br>
-                <input type="password" name="conf_passwd" placeholder="Confirm Password"/><br><br>
-                <input type="submit" name="submit" value="Sign up"/>
+                <input type="password" id="pass" name="passwd" placeholder="Password"/><br><br>
+                <input type="password" id="c_pass" name="conf_passwd" placeholder="Confirm Password"/><br><br>
+                <input type="submit" id="submit" name="submit" value="Sign up"/>
             </form>
         </div>
     </div>
 </div>
-<?php
-require_once (ROOT.'/views/site/viewFooter.php');
-?>
+<script src="./js/singup.js"></script>
+<div class="bot">
+    <hr>
+    <p>© 2017 Camagru</p>
+</div>
 </body>
 </html>

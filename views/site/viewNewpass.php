@@ -40,8 +40,9 @@
 
 
 </div>
-<?php
-require_once (ROOT.'/views/site/viewFooter.php');
-?>
+<div class="bot">
+    <hr>
+    <p>© 2017 Camagru</p>
+</div>
 </body>
 </html>

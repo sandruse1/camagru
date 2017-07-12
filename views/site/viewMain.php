@@ -1,4 +1,11 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./template/css/singup.css">
+    <title>Camagru MAIN</title>
+</head>
+<body>
 <div class="top">
     <div class="p"> <p>CAMAGRU</p></div>
     <div class="menu">
@@ -71,7 +78,9 @@
         </div>
     </div>
 </div>
-
-<?php
-require_once (ROOT.'/views/site/viewFooter');
-?>
+<div class="bot">
+    <hr>
+    <p>© 2017 Camagru</p>
+</div>
+</body>
+</html>

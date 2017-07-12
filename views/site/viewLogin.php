@@ -21,7 +21,7 @@
 <div class="main">
     <div class="img">
         <div class="forrm">
-            <form id="form" method="POST" action="../php/login.php">
+            <form id="form" >
                  <input type="text" name="login" placeholder="User name"/>
                     <br><br>
                 <input type="password" name="passwd" placeholder="Password"/><br><br>
@@ -31,6 +31,9 @@
         </div>
     </div>
 </div>
-<?php
-    require_once (ROOT.'/views/site/viewFooter.php');
-?>
+<div class="bot">
+    <hr>
+    <p>© 2017 Camagru</p>
+</div>
+    </body>
+</html>

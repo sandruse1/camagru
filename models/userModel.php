@@ -9,7 +9,7 @@ class userModel
         $sql = "INSERT INTO `user` (login, passwd, email, enter) VALUES (?, ?, ?, ?)";
         $result = $pdo->prepare($sql);
         $result->execute([$login, hash('whirlpool', $pass), $mail, 0]);
-        userModel::send_mail($login,$mail);
+        accountModel::send_mail($login,$mail);
     }
 
 

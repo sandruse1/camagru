@@ -5,19 +5,19 @@ include_once ROOT . '/models/accountModel.php';
 
 class UserController
 {
+    public function actionSingup_valid(){
+       accountModel::check_data_singup($_POST['login'],$_POST['passwd'],$_POST['conf_passwd'],$_POST['email']);
+    }
+
+    public function actionLogin_valid(){
+        accountModel::check_data_login($_POST['login'],$_POST['passwd']);
+    }
+
     public function actionSingup(){
-        if (accountModel::valid_login_singup($_POST['login']) && accountModel::valid_passwd_singup($_POST['passwd'],$_POST['conf_passwd']) && accountModel::valid_email_singup($_POST['email'])) {
             userModel::Singup($_POST['login'], $_POST['passwd'], $_POST['email']);
-        }
-        else{
-            //функція помилок
-            echo "error";
-        }
     }
 
     public function actionLogin(){
-        if ($_POST['login'] && $_POST['passwd']){
-            userModel::Login($_POST['login'],$_POST['passwd']);
-        }
+           userModel::Login($_POST['login'],$_POST['passwd']);
     }
 }

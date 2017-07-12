@@ -28,6 +28,40 @@ class accountModel
         }
     }
 
+    public static function check_data_singup($login, $passwd, $conf_passwd, $email){
+
+        if ($login == NULL || $passwd == NULL || $conf_passwd == NULL || $email == NULL){
+            $str = "Fill in all fields";
+            echo $str;
+        }
+        elseif (!accountModel::valid_login_singup($login)){
+            echo "not valid login";
+        }
+        elseif(!accountModel::valid_passwd_singup($passwd, $conf_passwd)){
+            echo "not valid password";
+        }elseif (!accountModel::valid_email_singup($email)){
+            echo "not valid email";
+        }else{
+            echo "";
+        }
+    }
+
+    public static function check_data_login($login, $pass){
+        if ($login == NULL || $pass == NULL ){
+            $str = "Fill in all fields";
+            echo $str;
+        }
+        elseif (!accountModel::valid_login_login($login)){
+            echo "not valid login";
+        }
+        elseif(!accountModel::valid_passwd_login($pass, $login)) {
+            echo "not valid password";
+        }else{
+            echo "";
+        }
+
+    }
+
     public static function valid_login_singup($login) {
         $pdo = Db::getConnection();
         $login_user = "SELECT * FROM `user` WHERE `login` = '$login'";
@@ -36,7 +70,7 @@ class accountModel
         $login_exists = $login_exists->fetchAll();
         $value = preg_match('/^[A-Za-z0-9 ]{3,20}$/i',htmlspecialchars(trim($login)));
         if (strlen($value) > 16 || strlen($value) < 4 || $login_exists != NULL){
-        echo "login_error";    return 0;
+        return 0;
         }
         return 1;
     }
@@ -51,11 +85,6 @@ class accountModel
             return 0;
         return 1;
     }
-
-//1 Whenever, Wherever by Shakira
-//2 Boys Bound Here by Blake Shelton
-//3 Love Somebody by Adam Levine/Maroon 5
-//4 Without You by Usher﻿
 
     public static function valid_passwd_singup($passwd, $conf_pass)    {
         if(!preg_match("/[\d\w]{8,20}/i", trim($passwd)) || $passwd != $conf_pass)
