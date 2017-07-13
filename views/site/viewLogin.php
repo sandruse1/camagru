@@ -22,10 +22,11 @@
     <div class="img">
         <div class="forrm">
             <form id="form" >
-                 <input type="text" name="login" placeholder="User name"/>
+                <p id="massege"></p>
+                 <input type="text" id="login" name="login" placeholder="User name"/>
                     <br><br>
-                <input type="password" name="passwd" placeholder="Password"/><br><br>
-                <input type="submit" name="submit" value="Login"/>
+                <input type="password" id="pass" name="passwd" placeholder="Password"/><br><br>
+                <input type="submit" id="submit" name="submit" value="Login"/>
                 <input type="submit" name="forgot" value="Forgot password?"/>
             </form>
         </div>
@@ -35,5 +36,6 @@
     <hr>
     <p>© 2017 Camagru</p>
 </div>
+<script src="./js/login.js"></script>
     </body>
 </html>

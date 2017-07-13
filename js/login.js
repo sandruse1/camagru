@@ -2,10 +2,8 @@
  * Created by sandruse on 13.07.17.
  */
 var submit = document.getElementById("submit"),
-    email = document.getElementById("email"),
     login = document.getElementById("login"),
     pass = document.getElementById("pass"),
-    c_pass = document.getElementById("c_pass"),
     p = document.getElementById("massege"),
     xmlreq = new XMLHttpRequest(),
     xmlreq2 = new XMLHttpRequest();
