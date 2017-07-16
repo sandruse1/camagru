@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./template/css/singup.css">
+    <link rel="stylesheet" href="./template/css/main.css">
     <title>Camagru MAIN</title>
 </head>
 <body>

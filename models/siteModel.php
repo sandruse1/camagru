@@ -8,4 +8,5 @@ class siteModel
         Db::createTable('like');
         Db::createTable('comment');
     }
+
 }

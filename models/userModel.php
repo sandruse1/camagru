@@ -5,19 +5,60 @@ class userModel
 {
     public static function Singup($login, $pass, $mail){
         $pdo = Db::getConnection();
-        //заносим юзера в базу даних
         $sql = "INSERT INTO `user` (login, passwd, email, enter) VALUES (?, ?, ?, ?)";
         $result = $pdo->prepare($sql);
         $result->execute([$login, hash('whirlpool', $pass), $mail, 0]);
         accountModel::send_mail($login,$mail);
     }
 
-
-    public static function Login($login)
-    {
+    public static function Login($login) {
         session_start();
         $_SESSION['logged_user'] = $login;
-        header('Location: http://localhost:8080/camagru/main');
+    }
+
+    public static function ForgotPassword($mail){
+        if ($mail) {
+            $pdo = Db::getConnection();
+            $login_user = "SELECT * FROM `user` WHERE `email` = ?";
+            $result_login = $pdo->prepare($login_user);
+            $result_login->execute([$mail]);
+            $login_exists = $result_login->fetchAll();
+
+            $activ1 = "SELECT enter FROM `user` WHERE `email` = ?";
+            $result1 = $pdo->prepare($activ1);
+            $result1->execute([$mail]);
+            $activation1 = $result1->fetch(PDO::FETCH_ASSOC);
+            $enter = $activation1['enter'];
+            if ($login_exists != NULL && $enter == "1") {
+                echo "We have sent you a message. Please check your email";
+                $activ = "SELECT login FROM `user` WHERE email = '$mail'";
+                $result = $pdo->prepare($activ);
+                $result->execute();
+                $activation = $result->fetch(PDO::FETCH_ASSOC);
+                $login = $activation['login'];
+                accountModel::send_mail_forgot($login, $mail);
+            } else {
+                if ($login_exists == NULL)
+                    echo "Email address does not exist";
+                else
+                    echo "You haven't activated your account yet";
+            }
+        }
+        else{
+            echo "Please fill in all fields";
+        }
+    }
+
+    public static function NewPassword($pass, $pass2, $login){
+        $pdo = Db::getConnection();
+        if ($pass2 != NULL && $pass != NULL) {
+            if ($pass2 === $pass) {
+              $sql = "UPDATE `user` SET passwd = '$pass' WHERE login = '$login'";
+               $result = $pdo->prepare($sql);
+                $result->execute();
+               echo "";
+            } else { echo "Passwords are different"; }
+        } else { echo "Please fill in all fields"; }
     }
 
     public static function UserSettings(){
@@ -100,73 +141,5 @@ class userModel
             }
         }
         require_once (ROOT.'/views/site/viewUsersettings.php');
-    }
-
-    public static function ForgotPassword(){
-
-        $pdo = Db::getConnection();
-        $mail = $_POST['email'];
-
-        if ($mail)
-        {
-            $login_user = "SELECT * FROM `user` WHERE `email` = ?";
-            $result_login = $pdo->prepare($login_user);
-            $result_login->execute([$mail]);
-            $login_exists = $result_login->fetchAll();
-
-            $activ1 = "SELECT enter FROM `user` WHERE `email` = ?";
-            $result1 = $pdo->prepare($activ1);
-            $result1->execute([$mail]);
-            $activation1 = $result1->fetch(PDO::FETCH_ASSOC);
-            $enter = $activation1['enter'];
-            if ($login_exists != NULL && $enter == "1")
-            {
-                $activ = "SELECT login FROM `user` WHERE email = '$mail'";
-                $result = $pdo->prepare($activ);
-                $result->execute();
-                $activation = $result->fetch(PDO::FETCH_ASSOC);
-                $login = $activation['login'];
-                send_mail_forgot($login, $mail);
-                header('Location: ../html/index.html?mail_is_send');
-            }
-            else
-            {
-                if ($login_exists == NULL)
-                    header('Location: ../html/forgot_pass.html?error=1');
-                else
-                    header('Location: ../html/forgot_pass.html?error=2');
-            }
-        }
-        else{
-            header('Location: ../html/forgot_pass.html?error=3');
-        }
-        require_once (ROOT.'/views/site/viewUsersettings.php');
-    }
-
-    public static function NewPassword(){
-        $data = $_POST;
-        $login = $_GET['login'];
-
-        $pdo = Db::getConnection();
-
-        if (isset($data['submit'])) {
-            $pass = $_POST['new_passwd'];
-            $pass2 = $_POST['new_passwd2'];
-            if ($pass2 != NULL && $pass != NULL) {
-                $pass = hash('whirlpool', $pass);
-                $pass2 = hash('whirlpool', $pass2);
-                if ($pass2 === $pass) {
-                    $sql = "UPDATE `user` SET passwd = '$pass' WHERE login = '$login'";
-                    $result = $pdo->prepare($sql);
-                    $result->execute();
-                    header('Location: ../html/index.html?pass_changed');
-                } else {
-                    header("Location: new_pass.php?login=".$login."&error=1");
-                }
-            } else {
-                header("Location: new_pass.php?login=".$login."&error=2");
-            }
-        }
-        require_once (ROOT.'/views/site/viewNewpass.php');
     }
 }

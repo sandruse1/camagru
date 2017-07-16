@@ -22,7 +22,7 @@
     <div class="img">
         <div class="forrm">
             <p id="massege"> </p>
-            <form id="form">
+            <div id="form">
                 <input type="email" id="email" name="email" placeholder="Email"/>
                 <br><br>
                 <input type="text" id="login" name="login" placeholder="User name"/>
@@ -30,7 +30,7 @@
                 <input type="password" id="pass" name="passwd" placeholder="Password"/><br><br>
                 <input type="password" id="c_pass" name="conf_passwd" placeholder="Confirm Password"/><br><br>
                 <input type="submit" id="submit" name="submit" value="Sign up"/>
-            </form>
+            </div>
         </div>
     </div>
 </div>

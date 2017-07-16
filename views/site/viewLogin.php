@@ -4,7 +4,7 @@
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="./template/css/singup.css">
+        <link rel="stylesheet" href="./template/css/login.css">
         <title>Camagru Login</title>
     </head>
     <body>
@@ -21,14 +21,14 @@
 <div class="main">
     <div class="img">
         <div class="forrm">
-            <form id="form" >
+            <div id="form" >
                 <p id="massege"></p>
                  <input type="text" id="login" name="login" placeholder="User name"/>
                     <br><br>
                 <input type="password" id="pass" name="passwd" placeholder="Password"/><br><br>
                 <input type="submit" id="submit" name="submit" value="Login"/>
-                <input type="submit" name="forgot" value="Forgot password?"/>
-            </form>
+                <input type="submit" id="submit_forgot" name="forgot" value="Forgot password?"/>
+            </div>
         </div>
     </div>
 </div>

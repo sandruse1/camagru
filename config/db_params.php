@@ -6,4 +6,9 @@
  * Time: 15:32
  */
 
-return array( 'host' => 'localhost', 'dbname' => 'camagru', 'user' => 'root', 'password' => '1234',);
+return array(
+    'host' => 'localhost',
+    'dbname' => 'camagru',
+    'user' => 'root',
+    'password' => ''
+    );

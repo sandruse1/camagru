@@ -27,17 +27,20 @@
 </div>
 <div class="main">
    <div class="img">
+       <p id="massege"></p>
        <div class="forrm">
             <p class="hell">We can help you change your password by using your e-mail<br> addresson the Camagru associated with your account.</p>
-           <form id="form" method="POST" action="../php/forgot_pass.php">
-                <input type="email" name="email" placeholder="Your Email"/><br><br>
-                <input type="submit" name="submit" value="Send email"/>
-            </form>
+           <div id="form">
+                <input type="email" id="email" name="email" placeholder="Your Email"/><br><br>
+                <input type="submit" id="submit" name="submit" value="Send email"/>
+            </div>
         </div>
    </div>
 </div>
-<?php
-require_once (ROOT.'/views/site/viewFooter.php');
-?>
+<div class="bot">
+    <hr>
+    <p>© 2017 Camagru</p>
+</div>
+<script src="./js/forgot.js"></script>
 </body>
 </html>

@@ -20,15 +20,30 @@ class SiteController
 
     public function actionSingup()
     {
-
         require_once(ROOT.'/views/site/viewSingup.php');
         return true;
     }
 
     public function actionLogin()
     {
-
         require_once(ROOT.'/views/site/viewLogin.php');
         return true;
+    }
+
+    public function actionMain(){
+        require_once(ROOT.'/views/site/viewMain.php');
+        return true;
+    }
+
+    public function actionForgot(){
+        require_once(ROOT.'/views/site/viewForgotpass.php');
+        return true;
+    }
+
+    public function actionNew_pass($login){
+        session_start();
+       $_SESSION['forgot_login_ll'] = $login;
+       require_once(ROOT.'/views/site/viewNewpass.php');
+       return true;
     }
 }

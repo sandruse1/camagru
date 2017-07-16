@@ -8,24 +8,22 @@
  */
 class accountModel
 {
-    public static function userActivation(){
+    public static function userActivation($act, $login){
         $pdo = Db::getConnection();
-        if(isset($_GET['act']) AND isset($_GET['login'])) {
-            $act = htmlspecialchars(stripslashes($_GET['act']));
-            $login = htmlspecialchars(stripslashes($_GET['login']));
-        }
+        $act = htmlspecialchars(stripslashes($act));
+        $login = htmlspecialchars(stripslashes($login));
         $activ = "SELECT id FROM `user` WHERE login = '$login'";
         $result = $pdo->prepare($activ);
         $result->execute();
         $activation = $result->fetch(PDO::FETCH_ASSOC);
         $newact = hash('whirlpool', $activation['id']);
-        if ($newact == $act)
-        {
+        if ($newact == $act) {
             $activ = "UPDATE `user` SET enter = '1' WHERE login = '$login'";
             $result = $pdo->prepare($activ);
             $result->execute();
-            header('Location: ../html/index.html?enter_suc');
         }
+        session_start();
+        $_SESSION['logged_user'] = $login;
     }
 
     public static function check_data_singup($login, $passwd, $conf_passwd, $email){
@@ -68,9 +66,10 @@ class accountModel
         $login_exists = $pdo->prepare($login_user);
         $login_exists->execute();
         $login_exists = $login_exists->fetchAll();
-        $value = preg_match('/^[A-Za-z0-9 ]{3,20}$/i',htmlspecialchars(trim($login)));
-        if (strlen($value) > 16 || strlen($value) < 4 || $login_exists != NULL){
-        return 0;
+        $value = trim($login);
+        if (strlen($value) > 16 || strlen($value) < 4 ||  $login_exists != NULL){
+
+            return 0;
         }
         return 1;
     }
@@ -121,7 +120,9 @@ class accountModel
     public static function valid_email_singup($mail){
         $pdo = Db::getConnection();
         $mail_user = "SELECT * FROM `user` WHERE `email` = '$mail'";
-        $mail_exists = $pdo->prepare($mail_user)->execute()->fetchAll();
+        $mail_exists = $pdo->prepare($mail_user);
+        $mail_exists->execute();
+        $mail_exists = $mail_exists->fetchAll();
         if (filter_var($mail, FILTER_VALIDATE_EMAIL) && $mail_exists == NULL)
             return 1;
         else
@@ -129,11 +130,15 @@ class accountModel
     }
 
     public static function send_mail_forgot($login, $email) {
-        $subject = "Camagru: зміна пароля";
-        $message = "Добрий день!\nВаш логин на сайті Camagru: " . $login . "\n Для зміни пароля перейдіть за посиланням:\n
-                http://e1r1p7:8080/projects/camagru/php/new_pass.php?login=".$login."\n\n
-                З повагою адміністратор, власник і всемогутній куратор сайта Camagru";
-        mail($email, $subject, $message);
+        $headers = "Content-Type: text/html; charset=utf-8"."\r\n";
+        $subject = "Camagru Forgot password";
+        $r1 = "<html><head><style>.button { background-color: #646464; border: none;color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;}</style><head>";
+        $r2 = "<body><h1>Camagru Forgot password</h1>";
+        $r3 = "<article><p>Hi, {$login}!</p><p>To reset your password please click here</p>";
+        $r4 = "<a href='http://localhost:/camagru/new_pass/{$login}' class='button'>Reset</a></article>";
+        $r5 = "<p>Best regards, Camagru Dev</p></body></html>";
+        $message = $r1.$r2.$r3.$r4.$r5;
+        mail($email, $subject, $message, $headers);
     }
 
     public static function send_mail($login,$email)
@@ -143,13 +148,16 @@ class accountModel
         $result = $pdo->prepare($activ);
         $result->execute();
         $activation = $result->fetch(PDO::FETCH_ASSOC);
-        $newact = hash('whirlpool', $activation['id']);
-        $subject = "Camagru: Підтвердження реєстрації";
-        $message = "Добрий день! Ви успішно зареєструвались на сайті Camagru\nВаш логін: ".$login."\n
-                Для активації вашого акаунта перейдіть за посиланням:\n
-                http://localhost:8080/projects/camagru/php/activation.php?login=".$login."&act=".$newact."\n\n
-                З повагою адміністратор, власник і всемогутній куратор сайта Camagru";
-        mail($email, $subject, $message);
+        $id = hash('whirlpool', $activation['id']);
+        $headers = "Content-Type: text/html; charset=utf-8"."\r\n";
+        $subject = "Camagru Account Activation";
+        $r1 = "<html><head><style>.button { background-color: #646464; border: none;color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;}</style><head>";
+        $r2 = "<body><h1>Camagru Account Activation</h1>";
+        $r3 = "<article><p>Hi, {$login}!</p><p>Thanks for registration on <span>Camagru<span></p><p>To activate your account on site please click on button below</p>";
+        $r4 = "<a href='http://localhost:/camagru/activation/{$login}/{$id}' class='button'>Activate</a></article>";
+        $r5 = "<p>Best regards, Camagru Dev</p></body></html>";
+        $message = $r1.$r2.$r3.$r4.$r5;
+        mail($email, $subject, $message, $headers);
     }
 
     public static function send_mail_coment($login, $email)
