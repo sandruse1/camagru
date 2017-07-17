@@ -28,7 +28,9 @@ class Router
                 $internalRoute = preg_replace("~$uriPattern~", $path, $uri);
                 $segment = explode('/', $internalRoute);
                 $controllerName = ucfirst(array_shift($segment)) . 'Controller';
+
                 $actionName = 'action' . ucfirst(array_shift($segment));
+
                 $parameters = $segment;
                 $controllerFile = ROOT.'/controllers/'.$controllerName.'.php';
                 if (file_exists($controllerFile)){

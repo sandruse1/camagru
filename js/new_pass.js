@@ -9,20 +9,22 @@ var submit = document.getElementById("submit"),
 
 submit.onclick = function () {
 
-    xmlreq.open("POST", "add_new_pass", true);
+    xmlreq.open("POST", "http://localhost:8080/camagru/add_new_pass", true);
     xmlreq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xmlreq.send("pass=" + pass.value + "&pass2=" + pass2.value + "&login=" + login);
     xmlreq.onreadystatechange = function () {
         if (xmlreq.readyState == 4 && xmlreq.status == 200) {
             var s = ((xmlreq.responseText).split('<!D'))[0];
-            if (s == '') {
-                p.innerText = "Your password was successfully changed";
-                hide_field();
-            }
-            else{ p.innerText = s; }
+            console.log(s);
+                if (s == '') {
+                    p.innerText = "Your password was successfully changed";
+                    hide_field();
+                }
+                else{ p.innerText = s; }
         }
     };
 }
+
 
 function hide_field() {
     div.style.display = "none";

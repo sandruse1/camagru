@@ -5,7 +5,7 @@ body{
     height: 100vh;
     min-width: 450px;
     background-size: cover;
-    background-image: url("../img/congruent_pentagon.png");
+    background-image: url("../../img/css_img/congruent_pentagon.png");
 }
 
 hr{

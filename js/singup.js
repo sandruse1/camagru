@@ -7,6 +7,7 @@ var submit = document.getElementById("submit"),
     pass = document.getElementById("pass"),
     c_pass = document.getElementById("c_pass"),
     p = document.getElementById("massege"),
+    div = document.getElementById("form"),
     xmlreq = new XMLHttpRequest(),
     xmlreq2 = new XMLHttpRequest();
 
@@ -21,7 +22,7 @@ submit.onclick = function () {
             if (s == '') {
                 do_singup();
                 p.innerText = "Check your email. We send you a massage";
-                clean_field();
+                hide_field();
                 }
              else{ p.innerText = s; }
         }
@@ -34,9 +35,6 @@ function do_singup() {
     xmlreq2.send("login=" + login.value + "&passwd=" + pass.value + "&email=" + email.value);
 }
 
-function clean_field() {
-    email.value = "";
-    login.value = "";
-    pass.value = "";
-    c_pass.value = "";
+function hide_field() {
+    div.style.display = "none";
 }

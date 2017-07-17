@@ -23,9 +23,9 @@
     <div class="all">
 
         <div class="frame">
-            <img id="frame1" src="../frame/frame1.png" alt="">
-            <img id="color" src="../frame/color.png" alt="">
-            <img id="girl" src="../frame/girl.png" alt="">
+            <img id="frame1" src="./img/frame/frame1.png" alt="">
+            <img id="color" src="./img/frame/color.png" alt="">
+            <img id="girl" src="./img/frame/girl.png" alt="">
         </div>
 
         <div class="center">
@@ -54,7 +54,7 @@
                 <canvas id="canvas" width="400" height="400"></canvas>
 
                 <div id="photo_div" >
-                    <img width="400" height="300" class="photo_divka" src="../img/sandruse.png" name="img" id="photo" alt="Ваша фотография">
+                    <img width="400" height="300" class="photo_divka" src="./img/css_img/sandruse.png" name="img" id="photo" alt="Ваша фотография">
                 </div>
 
                 <div id="save_to_g">
@@ -82,5 +82,6 @@
     <hr>
     <p>© 2017 Camagru</p>
 </div>
+<script src="./js/main.js"></script>
 </body>
 </html>

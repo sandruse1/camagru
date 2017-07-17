@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../template/css/new_pass.css">
-    <title>Camagru Main</title>
+    <title>Camagru New Password</title>
 </head>
 <body>
 <div class="top">

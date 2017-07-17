@@ -9,6 +9,9 @@
 return array(
     'camagru/gallery' => 'site/gallery',
     'camagru/singup' => 'site/singup',
+    'camagru/new_pass/singup' => 'site/singup',
+    'camagru/new_pass/login' => 'site/login',
+    'camagru/new_pass/exit' => 'site/startpage',
     'camagru/main' => 'site/main',
     'camagru/login' => 'site/login',
     'camagru/exit' => 'site/exit',
@@ -18,11 +21,11 @@ return array(
     'camagru/check_email_forgot' => 'user/forgot_pass',
     'camagru/do_singup' => 'user/singup',
     'camagru/do_login' => 'user/login',
-    'camagru/add_new_pass' => 'user/new_pass',
+    'camagru/add_new_pass' => 'user/newpass',
 
+    'camagru/loged_user' => 'account/loged_user',
     'camagru/check_singup' => 'account/singup_valid',
     'camagru/check_login' => 'account/login_valid',
     'camagru/activation/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)' => 'account/activate_account/$1/$2',
-
     'camagru' => 'site/startpage', //actionIndex в SiteController
 );

@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./template/css/index.css">
-    <title>Camagru Main</title>
+    <title>Camagru Start Page</title>
 </head>
 <body>
 <div class="top">
-    <div class="p"><p>CAMAGRU MAIN</p> </div>
+    <div class="p"><p>Start Page</p> </div>
     <div class="menu">
         <a href="gallery">Gallery</a>
         <a href="singup">Sign up</a>

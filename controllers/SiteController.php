@@ -4,7 +4,6 @@ include_once ROOT.'/models/siteModel.php';
 
 class SiteController
 {
-
     public function actionStartpage()
     {
         siteModel::CreateDB();

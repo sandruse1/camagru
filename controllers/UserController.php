@@ -20,8 +20,7 @@ class UserController
         return true;
     }
 
-    public function actionNew_pass(){
-        echo "2";
+    public function actionNewpass(){
         $pass= $_POST['pass']; $pass2 = $_POST['pass2']; $login = $_POST['login'];
         if (accountModel::valid_passwd_singup($pass, $pass2)) {
             $pass = hash('whirlpool', $pass);

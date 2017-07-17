@@ -6,6 +6,7 @@
  * Date: 11.07.17
  * Time: 17:03
  */
+include_once ROOT.'/models/accountModel.php';
 class AccountController
 {
     public function actionSingup_valid(){
@@ -22,6 +23,11 @@ class AccountController
     {
         accountModel::userActivation($act, $login);
         require_once(ROOT.'/views/site/viewMain.php');
+        return true;
+    }
+
+    public function actionLoged_user(){
+        accountModel::LoginOfUser();
         return true;
     }
 }

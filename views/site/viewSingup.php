@@ -21,7 +21,7 @@
 <div class="main">
     <div class="img">
         <div class="forrm">
-            <p id="massege"> </p>
+            <p id="massege" style="color: red"> </p>
             <div id="form">
                 <input type="email" id="email" name="email" placeholder="Email"/>
                 <br><br>

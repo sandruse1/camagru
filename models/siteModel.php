@@ -7,6 +7,9 @@ class siteModel
         Db::createTable('gallery');
         Db::createTable('like');
         Db::createTable('comment');
+        if (!file_exists(ROOT.'/gallery')) {
+            mkdir(ROOT . '/gallery', 0700);
+        }
     }
 
 }

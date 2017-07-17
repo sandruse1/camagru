@@ -29,12 +29,13 @@ var xmlgallery = new XMLHttpRequest(),
 
 
 
-xxx.open("POST", "../php/viewMain.php", true);
+xxx.open("POST", "loged_user", true);
 xxx.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-xxx.send("user_name=" + "1");
+xxx.send();
 xxx.onreadystatechange = function () {
     if (xxx.readyState == 4 && xxx.status == 200) {
         var result = xxx.responseText;
+        console.log(result);
         login = result;
         input.className = "error";
         input.name = "user";
@@ -93,7 +94,7 @@ function to_none() {
     photo_frame.style.display = "none";
     make_photo.style.display = "block";
     load_photo.style.display = "block";
-    photo.src = "../img/sandruse.png";
+    photo.src = "./img/css_img/sandruse.png";
     photo_div.className = "none";
     to_save.style.display = "none";
     video_frame.style.display = "none";
@@ -152,7 +153,7 @@ mini_frame.onclick = function ()
     to_none();
     video_frame.style.display = "block";
     mini_frame.style.boxShadow = "0 0 20px yellow";
-    set_atributes("../frame/frame1.png", "400px", "300px");
+    set_atributes("./img/frame/frame1.png", "400px", "300px");
 }
 
 mini_color.onclick = function ()
@@ -160,7 +161,7 @@ mini_color.onclick = function ()
     to_none();
     video_frame.style.display = "block";
     mini_color.style.boxShadow = "0 0px 20px yellow";
-    set_atributes("../frame/color.png", "350px", "300px");
+    set_atributes("./img/frame/color.png", "350px", "300px");
 }
 
 mini_girl.onclick = function ()
@@ -168,7 +169,7 @@ mini_girl.onclick = function ()
     to_none();
     video_frame.style.display = "block";
     mini_girl.style.boxShadow = "0 0px 20px yellow";
-    set_atributes("../frame/girl.png", "200px", "300px");
+    set_atributes("./img/frame/girl.png", "200px", "300px");
 }
 
 function delete_img(src) {

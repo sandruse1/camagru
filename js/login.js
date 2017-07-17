@@ -10,7 +10,7 @@ var submit = document.getElementById("submit"),
     xmlreq2 = new XMLHttpRequest();
 
 submit_forgot.onclick = function(){
-    location.href= ' http://localhost/camagru/forgot';
+    location.href= ' http://localhost:8080/camagru/forgot';
 }
 
 submit.onclick = function () {
@@ -30,5 +30,5 @@ function do_login() {
     xmlreq2.open("POST", "do_login", true);
     xmlreq2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xmlreq2.send("login=" + login.value);
-    location.href= ' http://localhost/camagru/main';
+    location.href= ' http://localhost:8080/camagru/main';
 }

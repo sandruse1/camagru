@@ -4,6 +4,7 @@
 var submit = document.getElementById("submit"),
     email = document.getElementById("email"),
     xmlreq = new XMLHttpRequest(),
+    div = document.getElementById("forrm"),
     p = document.getElementById("massege");
 
 submit.onclick = function () {
@@ -14,6 +15,9 @@ submit.onclick = function () {
     xmlreq.onreadystatechange = function () {
         if (xmlreq.readyState == 4 && xmlreq.status == 200) {
             var s = ((xmlreq.responseText).split('<!D'))[0];
+            if (s == "We have sent you a message. Please check your email"){
+                div.style.display = "none";
+            }
             p.innerText = s;
             email.value = "";
         }
