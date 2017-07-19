@@ -1,6 +1,7 @@
 <?php
 
 include_once ROOT.'/models/siteModel.php';
+include_once ROOT.'/models/galleryModel.php';
 
 class SiteController
 {

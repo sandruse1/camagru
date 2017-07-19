@@ -25,8 +25,8 @@ var form = document.getElementById("menu"),
     to_save = document.getElementById('save_to_g'),
     delete_ph_gall = document.getElementById('delete_from_g');
 var xmlgallery = new XMLHttpRequest(),
-    xxx = new XMLHttpRequest();
-
+    xxx = new XMLHttpRequest(),
+    xmlhttp = new XMLHttpRequest();
 
 
 xxx.open("POST", "loged_user", true);
@@ -35,15 +35,18 @@ xxx.send();
 xxx.onreadystatechange = function () {
     if (xxx.readyState == 4 && xxx.status == 200) {
         var result = xxx.responseText;
-        console.log(result);
-        login = result;
-        input.className = "error";
-        input.name = "user";
-        input.type = "submit";
-        input.value = login;
-        form.insertBefore(input, form.firstChild);
-        make_gallery(login);
-        stream_go();
+        if (result != "!!!PPP") {
+            login = result;
+            input.className = "error";
+            input.name = "user";
+            input.type = "submit";
+            input.value = login;
+            form.insertBefore(input, form.firstChild);
+            make_gallery(login);
+            stream_go();
+        }
+        else
+            location.href= ' http://localhost:8080/camagru/';
     }
 };
 
@@ -60,11 +63,11 @@ function stream_go() {
         });
     context.translate(canvas.width, 0);
     context.scale(-1, 1);
-
 }
 
 make_photo.onclick = function()
 {
+    console.log("take");
     photo_div.className = "photo_div";
     context.drawImage(video, 0, 0, 400, 400);
     photo.setAttribute('src', canvas.toDataURL('image/png'));
@@ -73,7 +76,29 @@ make_photo.onclick = function()
     load_photo.style.display = "none";
     video_frame.style.display = "none";
     photo_frame.style.display = "block";
+}
 
+do_yes.onclick = function ()
+{
+    console.log("do_yes");
+    console.log(login);
+    console.log(what_frame);
+    xmlhttp.open("POST", "http://localhost:8080/camagru/img_plus_img", true);
+    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xmlhttp.send("sr=" + photo.src + "&user_name=" + login + "&fr_src=" + what_frame);
+
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var result = xmlhttp.responseText;
+            console.log(result);
+            var div = document.getElementById("user_g");
+            var img = document.createElement("img")
+            img.setAttribute('src', result);
+            img.setAttribute('onclick', "delete_img(this.src)");
+            div.insertBefore(img, div.firstChild);
+            to_none();
+        }
+    };
 }
 
 // load_photo.onclick = function() {
@@ -101,6 +126,7 @@ function to_none() {
     mini_girl.style.boxShadow = "none";
     mini_frame.style.boxShadow = "none";
     mini_color.style.boxShadow = "none";
+    delete_ph_gall.style.display = "none";
 
 }
 
@@ -116,18 +142,6 @@ function set_atributes(src , wid, heig) {
     what_frame = what_frame[1];
 }
 
-
-
-do_yes.onclick = function ()
-{
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "../php/get_img.php", true);
-    xmlhttp.setRequestHeader("C", "application/x-www-form-urlencoded");
-    xmlhttp.send("sr=" + photo.src + "&user_name=" + login + "&fr_src=" + what_frame);
-
-    window.location.reload(true);
-}
-
 do_no.onclick = function ()
 {
     to_none();
@@ -136,11 +150,33 @@ do_no.onclick = function ()
 
 do_yes_g.onclick = function ()
 {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "../php/delete_from_gallery.php", true);
+
+    xmlhttp.open("POST", "delete_from_gallery", true);
     xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xmlhttp.send("sr=" + src_to_delete);
-    window.location.reload(true);
+    // var new_src = "http://localhost:8080/camagru/gallery/" + src_to_delete;
+    // console.log(new_src);
+    // var img_i_want_delete = getAllElementsWithAttribute("src", new_src);
+    // console.log(img_i_want_delete);
+    // if (img_i_want_delete != "0"){
+    //
+    //     img_i_want_delete.style.visibility = "hidden";
+    // }
+    // to_none();
+    window.location.reload();
+}
+
+function getAllElementsWithAttribute(attribute, value)
+{
+    var allElements = document.getElementsByTagName('img');
+    for (var i = 0, n = allElements.length; i < n; i++)
+    {
+        if ( allElements[i].src == value)
+        {
+            return allElements[i];
+        }
+    }
+    return "0";
 }
 
 do_no_g.onclick = function ()
@@ -177,11 +213,11 @@ function delete_img(src) {
     src_to_delete = src;
     src_to_delete = src_to_delete.split('gallery/');
     src_to_delete = src_to_delete[1];
-
 }
 
 function make_gallery(login1) {
-    xmlgallery.open("POST", "../php/gallery_in_main.php", true);
+
+    xmlgallery.open("POST", "gallery_in_main", true);
     xmlgallery.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xmlgallery.send("user_name=" + login1);
     xmlgallery.onreadystatechange = function () {
@@ -190,11 +226,11 @@ function make_gallery(login1) {
             var div = document.getElementById("user_g");
             if (result != '') {
                 result = result.split(',');
-
                 for (var i = 0; i < result.length; i++) {
                     var img = document.createElement("img")
                     img.setAttribute('src', result[i]);
                     img.setAttribute('onclick', "delete_img(this.src)");
+                    img.setAttribute('visibility', "visible");
                     div.insertBefore(img, div.firstChild);
                 }
             }
@@ -205,7 +241,6 @@ function make_gallery(login1) {
             }
         }
     };
-
 }
 
 

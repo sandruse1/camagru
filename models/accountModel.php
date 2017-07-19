@@ -170,8 +170,12 @@ class accountModel
 
     public static function LoginOfUser(){
         session_start();
-        $login = $_SESSION['logged_user'];
-        echo $login;
+        if (isset($_SESSION['logged_user'])) {
+            $login = $_SESSION['logged_user'];
+            echo $login;
+        }
+        else
+            echo "!!!PPP";
     }
 
 }

@@ -7,6 +7,8 @@
  */
 
 return array(
+    'camagru/gallery_in_main' => 'gallery/gallery_in_main',
+
     'camagru/gallery' => 'site/gallery',
     'camagru/singup' => 'site/singup',
     'camagru/new_pass/singup' => 'site/singup',
@@ -22,6 +24,10 @@ return array(
     'camagru/do_singup' => 'user/singup',
     'camagru/do_login' => 'user/login',
     'camagru/add_new_pass' => 'user/newpass',
+
+    'camagru/img_plus_img' => 'gallery/img_plus_img',
+    'camagru/delete_from_gallery' => 'gallery/delete_from_gallery',
+
 
     'camagru/loged_user' => 'account/loged_user',
     'camagru/check_singup' => 'account/singup_valid',

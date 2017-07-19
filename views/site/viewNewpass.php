@@ -9,9 +9,9 @@
 <div class="top">
     <div class="p"><p>Set new password</p></div>
     <div class="menu">
-        <a href="exit">Exit</a>
-        <a href="singup">Sign up</a>
-        <a href="login">Login</a>
+        <a href="http://localhost:8080/camagru">Exit</a>
+        <a href="http://localhost:8080/camagru/singup">Sign up</a>
+        <a href="http://localhost:8080/camagru/login">Login</a>
     </div>
     <div class="hr">
         <hr>

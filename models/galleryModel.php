@@ -8,6 +8,60 @@
  */
 class galleryModel
 {
+    public static function ImgPlusImg($img, $login, $frame){
+        $pdo = Db::getConnection();
+        $img = str_replace('data:image/png;base64,', '', $img);
+        $img = str_replace(' ', '+', $img);
+        $data = base64_decode($img);
+        $sql = "INSERT INTO `gallery` (user_name) VALUES (?)";
+        $result = $pdo->prepare($sql);
+        $result->execute([$login]);
+        $activ = "SELECT MAX(id) FROM `gallery`";
+        $result = $pdo->prepare($activ);
+        $result->execute();
+        $id = $result->fetch(PDO::FETCH_ASSOC);
+        $n = $id['MAX(id)'];
+        $activ = "UPDATE `gallery` SET img_src = './gallery/$n.png' WHERE id = '$n'";
+        $result = $pdo->prepare($activ);
+        $result->execute();
+        file_put_contents("./gallery/$n.png", $data);
+        $Image = ImageCreateFromPNG("./gallery/$n.png");
+        $logo = ImageCreateFromPNG("./img/frame/$frame");
+        if ($frame == "frame1.png")
+            ImageCopy($Image, $logo, 0, 0, 0, 0, 350, 200);
+        elseif ($frame == "color.png")
+            ImageCopy($Image, $logo, 0, 0, 0, 0, 350, 400);
+        elseif ($frame == "girl.png")
+            ImageCopy($Image, $logo, 0, 0, 0, 0, 200, 400);
+        imagepng($Image, "./gallery/$n.png");
+        echo "./gallery/$n.png";
+    }
+
+    public static function Delete_from_gallery($src){
+        $pdo = Db::getConnection();
+        $activ = "DELETE FROM `gallery` WHERE img_src = './gallery/$src'";
+        $result = $pdo->prepare($activ);
+        $result->execute();
+        unlink("./gallery/$src");
+    }
+
+    public static function GelleryInMain($login){
+        $pdo = Db::getConnection();
+        $activ = "SELECT img_src FROM `gallery` WHERE user_name = '$login'";
+        $result = $pdo->prepare($activ);
+        $result->execute();
+        $array = array();
+        $src = $result->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($src as $elem){
+            array_push($array, $elem['img_src']);
+        }
+        $array = implode(",", $array);
+        echo $array;
+    }
+
+    /**
+     * Пагінація
+     **/
     public static function get_img($dir){
         @$files = scandir($dir);
         $pattern = '#\.(jpe?g|png|gif)$#i';
@@ -87,31 +141,6 @@ class galleryModel
         return $startpage.$back.$page2left.$page1left.'<a class="nav-active">'.$page.'</a>'.$page1right.$page2right.$forward.$endpage;
     }
 
-    public static function DeleteImg(){
-        $pdo = Db::getConnection();
-        $src = $_POST['sr'];
-        $activ = "DELETE FROM `gallery` WHERE img_src = '../gallery/$src'";
-        $result = $pdo->prepare($activ);
-        $result->execute();
-        unlink("../gallery/$src");
-    }
-
-    public static function GelleryInMain(){
-        $pdo = Db::getConnection();
-        $login = $_POST['user_name'];
-        $activ = "SELECT img_src FROM `gallery` WHERE user_name = '$login'";
-        $result = $pdo->prepare($activ);
-        $result->execute();
-        $array = array();
-        $src = $result->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($src as $elem){
-            array_push($array, $elem['img_src']);
-        }
-
-        $array = implode(",", $array);
-        echo $array;
-    }
-
     public static function GetComment(){
         $pdo = Db::getConnection();
         $src = $_POST['src'];
@@ -135,50 +164,6 @@ class galleryModel
             $text = $text."±@±".$value['coments']."±@±".$value['users_comented'];
         }
         echo $text;
-    }
-
-    public static function ImgPlusImg(){
-        $pdo = Db::getConnection();
-        if (array_key_exists('sr', $_POST)) {
-
-            $img = $_POST['sr'];
-            $login = $_POST['user_name'];
-            $frame = $_POST['fr_src'];
-            $img = str_replace('data:image/png;base64,', '', $img);
-            $img = str_replace(' ', '+', $img);
-            $data = base64_decode($img);
-
-            $sql = "INSERT INTO `gallery` (user_name) VALUES (?)";
-            $result = $pdo->prepare($sql);
-            $result->execute([$login]);
-
-            $activ = "SELECT MAX(id) FROM `gallery`";
-            $result = $pdo->prepare($activ);
-            $result->execute();
-            $id = $result->fetch(PDO::FETCH_ASSOC);
-            $n = $id['MAX(id)'];
-
-
-            $activ = "UPDATE `gallery` SET img_src = '../gallery/$n.png' WHERE id = '$n'";
-            $result = $pdo->prepare($activ);
-            $result->execute();
-            file_put_contents("../gallery/$n.png", $data);
-
-            $Image = ImageCreateFromPNG("../gallery/$n.png");
-            $logo = ImageCreateFromPNG("../frame/$frame");
-
-
-            if ($frame == "frame1.png")
-                ImageCopy($Image, $logo, 0, 0, 0, 0, 350, 200);
-            elseif ($frame == "color.png")
-                ImageCopy($Image, $logo, 0, 0, 0, 0, 350, 400);
-            elseif ($frame == "girl.png")
-                ImageCopy($Image, $logo, 0, 0, 0, 0, 200, 400);
-
-            imagepng($Image, "../gallery/$n.png");
-
-
-        }
     }
 
     public static function MakeLike(){
