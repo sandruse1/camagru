@@ -46,4 +46,9 @@ class SiteController
        require_once(ROOT.'/views/site/viewNewpass.php');
        return true;
     }
+
+    public function actionUser_set(){
+        require_once(ROOT.'/views/site/viewUsersettings.php');
+        return true;
+    }
 }

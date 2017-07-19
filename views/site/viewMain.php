@@ -9,10 +9,10 @@
 <div class="top">
     <div class="p"> <p>CAMAGRU</p></div>
     <div class="menu">
-        <form id="menu" method="POST" action="../php/menu.php">
-            <input type="submit" name="gallery" value="Gallery"/>
-            <input type="submit" name="exit" value="Exit"/>
-        </form>
+        <div id="menu">
+            <input id="go_to_gallery" type="submit" name="gallery" value="Gallery"/>
+            <input id="do_exit" type="submit" name="exit" value="Exit"/>
+        </div>
     </div>
     <div class="hr">
         <hr>

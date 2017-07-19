@@ -140,6 +140,5 @@ class userModel
                     header('Location: ../html/user_set.html?error=5');
             }
         }
-        require_once (ROOT.'/views/site/viewUsersettings.php');
     }
 }

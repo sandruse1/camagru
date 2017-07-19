@@ -9,6 +9,7 @@
 return array(
     'camagru/gallery_in_main' => 'gallery/gallery_in_main',
 
+    'camagru/user_set' => 'site/user_set',
     'camagru/gallery' => 'site/gallery',
     'camagru/singup' => 'site/singup',
     'camagru/new_pass/singup' => 'site/singup',

@@ -23,10 +23,13 @@ var form = document.getElementById("menu"),
     user_g = document.getElementById('user_g'),
     src_to_delete,
     to_save = document.getElementById('save_to_g'),
-    delete_ph_gall = document.getElementById('delete_from_g');
-var xmlgallery = new XMLHttpRequest(),
+    delete_ph_gall = document.getElementById('delete_from_g'),
+    xmlgallery = new XMLHttpRequest(),
     xxx = new XMLHttpRequest(),
-    xmlhttp = new XMLHttpRequest();
+    xmlhttp = new XMLHttpRequest(),
+    do_exit = document.getElementById('do_exit'),
+    go_to_gallery = document.getElementById('go_to_gallery'),
+    go_to_user_set;
 
 
 xxx.open("POST", "loged_user", true);
@@ -38,9 +41,11 @@ xxx.onreadystatechange = function () {
         if (result != "!!!PPP") {
             login = result;
             input.className = "error";
+            input.setAttribute('id', "go_to_user_set");
             input.name = "user";
             input.type = "submit";
             input.value = login;
+            input.setAttribute('onclick', "go_to_user_set()");
             form.insertBefore(input, form.firstChild);
             make_gallery(login);
             stream_go();
@@ -49,6 +54,18 @@ xxx.onreadystatechange = function () {
             location.href= ' http://localhost:8080/camagru/';
     }
 };
+
+do_exit.onclick = function () {
+    location.href= ' http://localhost:8080/camagru/exit';
+}
+
+go_to_gallery.onclick = function () {
+    location.href= ' http://localhost:8080/camagru/gallery';
+}
+
+function go_to_user_set() {
+    location.href= ' http://localhost:8080/camagru/user_set'
+}
 
 function stream_go() {
     navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.
@@ -150,33 +167,10 @@ do_no.onclick = function ()
 
 do_yes_g.onclick = function ()
 {
-
     xmlhttp.open("POST", "delete_from_gallery", true);
     xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xmlhttp.send("sr=" + src_to_delete);
-    // var new_src = "http://localhost:8080/camagru/gallery/" + src_to_delete;
-    // console.log(new_src);
-    // var img_i_want_delete = getAllElementsWithAttribute("src", new_src);
-    // console.log(img_i_want_delete);
-    // if (img_i_want_delete != "0"){
-    //
-    //     img_i_want_delete.style.visibility = "hidden";
-    // }
-    // to_none();
     window.location.reload();
-}
-
-function getAllElementsWithAttribute(attribute, value)
-{
-    var allElements = document.getElementsByTagName('img');
-    for (var i = 0, n = allElements.length; i < n; i++)
-    {
-        if ( allElements[i].src == value)
-        {
-            return allElements[i];
-        }
-    }
-    return "0";
 }
 
 do_no_g.onclick = function ()
@@ -216,7 +210,6 @@ function delete_img(src) {
 }
 
 function make_gallery(login1) {
-
     xmlgallery.open("POST", "gallery_in_main", true);
     xmlgallery.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xmlgallery.send("user_name=" + login1);
@@ -235,7 +228,7 @@ function make_gallery(login1) {
                 }
             }
             else{
-                var p = document.createElement("p")
+                var p = document.createElement("p");
                 p.innerHTML = "Your photos";
                 div.insertBefore(p, div.firstChild);
             }
