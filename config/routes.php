@@ -7,6 +7,7 @@
  */
 
 return array(
+
     'camagru/gallery_in_main' => 'gallery/gallery_in_main',
     'camagru/makename' => 'user/change_name',
     'camagru/profilepass' => 'user/change_password',
@@ -14,6 +15,7 @@ return array(
 
     'camagru/user_set' => 'site/user_set',
     'camagru/gallery_page' => 'site/gallery',
+
     'camagru/singup' => 'site/singup',
     'camagru/new_pass/singup' => 'site/singup',
     'camagru/new_pass/login' => 'site/login',

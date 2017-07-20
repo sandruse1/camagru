@@ -9,7 +9,7 @@
 <div class="top">
     <div class="p"><p>Start Page</p> </div>
     <div class="menu">
-        <a href="gallery">Gallery</a>
+        <a href="gallery_page">Gallery</a>
         <a href="singup">Sign up</a>
         <a href="login">Login</a>
     </div>

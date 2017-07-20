@@ -14,26 +14,6 @@ var show = document.getElementById('hidden'),
     comment_list = document.getElementById('coment_list');
 
 
-$(document).ready(function(){
-    $('.gallery').on('click', 'a.nav-link', function(e){
-        e.preventDefault();
-        var page = $(this).data('page');
-        $.ajax({
-            url: '../php/pagination_ajax.php',
-            type: 'GET',
-            data: {page: page},
-            success: function(res){
-                $('.gallery').empty();
-                $('.gallery').hide().fadeIn(1000).html(res);
-            },
-            error: function(){
-                alert('Error');
-            }
-        });
-    });
-});
-
-
 exit.onclick = function () {
     show.style.display = "none";
 }
