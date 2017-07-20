@@ -141,6 +141,46 @@ class galleryModel
         return $startpage.$back.$page2left.$page1left.'<a class="nav-active">'.$page.'</a>'.$page1right.$page2right.$forward.$endpage;
     }
 
+        public static function Pagination(){
+        $perpage = 6;
+        $count_img = count($images);
+        $count_pages = ceil($count_img / $perpage);
+        if (!$count_pages) $count_pages = 1;
+        if(isset($_GET['page'])){
+            $page = (int)$_GET['page'];
+            if ($page < 1) $page = 1;
+        }else{
+            $page =1;
+        }
+        if ($page > $count_pages) $page = $count_pages;
+        $start_pos = ($page - 1) * $perpage;
+        $end_pos = $start_pos + $perpage;
+        if ($end_pos > $count_img) $end_pos = $count_img;
+        $pagination = pagination($page, $count_pages);
+    }
+
+    public static function PaginationAjax(){
+        $dir = '../gallery/';
+
+        $images = get_img($dir);
+
+        require_once 'pagination.php';
+
+// формуєм і виводим
+        if($images): $i = $start_pos+1; $output = null;
+            for($j = $start_pos; $j < $end_pos; $j++):
+                $output .= '<div class="item">';
+                $output .= '<div>';
+                $output .= '<img class="front" src="' .$dir .$images[$j]. '" onclick="show_hidden(this.src)" alt="photo">';
+                $output .= '<img class="back" src="../img/sandruse.png" onclick="show_hidden(\'' .$dir.$images[$j].'\')" alt="icon">';
+                $output .= '</div>';
+                $output .= '</div>';
+                $i++; endfor;
+        endif;
+
+        echo $output . '<div class="clear"></div><div class="pagination">' .$pagination. '</div>';
+    }
+
     public static function GetComment(){
         $pdo = Db::getConnection();
         $src = $_POST['src'];
@@ -245,45 +285,6 @@ class galleryModel
             echo "-1";
     }
 
-//    public static function Pagination(){
-//        $perpage = 6;
-//        $count_img = count($images);
-//        $count_pages = ceil($count_img / $perpage);
-//        if (!$count_pages) $count_pages = 1;
-//        if(isset($_GET['page'])){
-//            $page = (int)$_GET['page'];
-//            if ($page < 1) $page = 1;
-//        }else{
-//            $page =1;
-//        }
-//        if ($page > $count_pages) $page = $count_pages;
-//        $start_pos = ($page - 1) * $perpage;
-//        $end_pos = $start_pos + $perpage;
-//        if ($end_pos > $count_img) $end_pos = $count_img;
-//        $pagination = pagination($page, $count_pages);
-//    }
-
-//    public static function PaginationAjax(){
-//        $dir = '../gallery/';
-//
-//        $images = get_img($dir);
-//
-//        require_once 'pagination.php';
-//
-//// формуєм і виводим
-//        if($images): $i = $start_pos+1; $output = null;
-//            for($j = $start_pos; $j < $end_pos; $j++):
-//                $output .= '<div class="item">';
-//                $output .= '<div>';
-//                $output .= '<img class="front" src="' .$dir .$images[$j]. '" onclick="show_hidden(this.src)" alt="photo">';
-//                $output .= '<img class="back" src="../img/sandruse.png" onclick="show_hidden(\'' .$dir.$images[$j].'\')" alt="icon">';
-//                $output .= '</div>';
-//                $output .= '</div>';
-//                $i++; endfor;
-//        endif;
-//
-//        echo $output . '<div class="clear"></div><div class="pagination">' .$pagination. '</div>';
-//    }
     public static function SendComment(){
         $pdo = Db::getConnection();
         $src = $_POST['src'];
@@ -327,36 +328,36 @@ class galleryModel
         }
     }
 
-    public static function UploadPhoto(){
-        session_start();
-        $login = $_SESSION['logged_user'];
-
-        if(!empty($_FILES['photo_file']['tmp_name'])){
-
-            if(!empty($_FILES['photo_file']['error'])){
-                header("Location: ../html/main.html?error=2"); // помилка загрузки
-            }
-            elseif ($_FILES['photo_file']['size'] > 2*1024*1024){
-                header("Location: ../html/main.html?error=3"); ///файл завеликий
-            }
-
-            switch ($_FILES['photo_file']['type']){
-
-                case 'image/png';
-                case 'image/x-png';
-                    $type = 'png';
-                    break;
-
-                default:
-                    header("Location: ../html/main.html?error=4"); //неправильний формат файла
-            }
-
-            if(!move_uploaded_file($_FILES['photo_file']['tmp_name'], "../gallery/$login.$type")){
-                header("Location: ../html/main.html?error=5"); //не вдалось загрузити файл
-            }
-            header("Location: ../html/main.html"); //все добре
-        }
-        else
-            header("Location: ../html/main.html?error=1"); //ви не вибрали файл
-    }
-}
+//    public static function UploadPhoto(){
+//        session_start();
+//        $login = $_SESSION['logged_user'];
+//
+//        if(!empty($_FILES['photo_file']['tmp_name'])){
+//
+//            if(!empty($_FILES['photo_file']['error'])){
+//                header("Location: ../html/main.html?error=2"); // помилка загрузки
+//            }
+//            elseif ($_FILES['photo_file']['size'] > 2*1024*1024){
+//                header("Location: ../html/main.html?error=3"); ///файл завеликий
+//            }
+//
+//            switch ($_FILES['photo_file']['type']){
+//
+//                case 'image/png';
+//                case 'image/x-png';
+//                    $type = 'png';
+//                    break;
+//
+//                default:
+//                    header("Location: ../html/main.html?error=4"); //неправильний формат файла
+//            }
+//
+//            if(!move_uploaded_file($_FILES['photo_file']['tmp_name'], "../gallery/$login.$type")){
+//                header("Location: ../html/main.html?error=5"); //не вдалось загрузити файл
+//            }
+//            header("Location: ../html/main.html"); //все добре
+//        }
+//        else
+//            header("Location: ../html/main.html?error=1"); //ви не вибрали файл
+//    }
+//}

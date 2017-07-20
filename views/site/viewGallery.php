@@ -10,7 +10,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/gallery.css">
+    <link rel="stylesheet" href="./template/css/gallery.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>Camagru Gallery</title>
 </head>
@@ -78,6 +78,6 @@
     <hr>
     <p>© 2017 Camagru</p>
 </div>
-<script src="../js/gallery.js"></script>
+<script src="./js/gallery.js"></script>
 </body>
 </html>

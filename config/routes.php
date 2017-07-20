@@ -8,9 +8,12 @@
 
 return array(
     'camagru/gallery_in_main' => 'gallery/gallery_in_main',
+    'camagru/makename' => 'user/change_name',
+    'camagru/profilepass' => 'user/change_password',
+    'camagru/accdel' => 'user/delete_account',
 
     'camagru/user_set' => 'site/user_set',
-    'camagru/gallery' => 'site/gallery',
+    'camagru/gallery_page' => 'site/gallery',
     'camagru/singup' => 'site/singup',
     'camagru/new_pass/singup' => 'site/singup',
     'camagru/new_pass/login' => 'site/login',
@@ -21,6 +24,7 @@ return array(
     'camagru/forgot' => 'site/forgot',
     'camagru/new_pass/([a-zA-Z0-9]+)' => 'site/new_pass/$1',
 
+    'camagru/change_profile' => 'user/change_profile',
     'camagru/check_email_forgot' => 'user/forgot_pass',
     'camagru/do_singup' => 'user/singup',
     'camagru/do_login' => 'user/login',
@@ -28,7 +32,6 @@ return array(
 
     'camagru/img_plus_img' => 'gallery/img_plus_img',
     'camagru/delete_from_gallery' => 'gallery/delete_from_gallery',
-
 
     'camagru/loged_user' => 'account/loged_user',
     'camagru/check_singup' => 'account/singup_valid',

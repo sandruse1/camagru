@@ -38,6 +38,7 @@ xxx.send();
 xxx.onreadystatechange = function () {
     if (xxx.readyState == 4 && xxx.status == 200) {
         var result = xxx.responseText;
+        console.log(result);
         if (result != "!!!PPP") {
             login = result;
             input.className = "error";
@@ -60,7 +61,7 @@ do_exit.onclick = function () {
 }
 
 go_to_gallery.onclick = function () {
-    location.href= ' http://localhost:8080/camagru/gallery';
+    location.href= ' http://localhost:8080/camagru/gallery_page';
 }
 
 function go_to_user_set() {
@@ -84,7 +85,7 @@ function stream_go() {
 
 make_photo.onclick = function()
 {
-    console.log("take");
+
     photo_div.className = "photo_div";
     context.drawImage(video, 0, 0, 400, 400);
     photo.setAttribute('src', canvas.toDataURL('image/png'));
@@ -97,9 +98,6 @@ make_photo.onclick = function()
 
 do_yes.onclick = function ()
 {
-    console.log("do_yes");
-    console.log(login);
-    console.log(what_frame);
     xmlhttp.open("POST", "http://localhost:8080/camagru/img_plus_img", true);
     xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xmlhttp.send("sr=" + photo.src + "&user_name=" + login + "&fr_src=" + what_frame);
@@ -107,7 +105,6 @@ do_yes.onclick = function ()
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             var result = xmlhttp.responseText;
-            console.log(result);
             var div = document.getElementById("user_g");
             var img = document.createElement("img")
             img.setAttribute('src', result);

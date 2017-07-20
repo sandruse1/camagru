@@ -51,4 +51,11 @@ class SiteController
         require_once(ROOT.'/views/site/viewUsersettings.php');
         return true;
     }
+
+    public function actionExit(){
+        $_SESSION['logged_user'] = "";
+        session_unset();
+        require_once(ROOT.'/views/site/viewStartpage.php');
+        return true;
+    }
 }
