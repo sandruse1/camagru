@@ -32,7 +32,7 @@ function show_hidden(src) {
 
 like.onclick = function make_like() {
 
-    xml.open("POST", "../php/make_like.php", true);
+    xml.open("POST", "make_like", true);
     xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xml.send("src=" + main_src);
     xml.onreadystatechange = function () {
@@ -48,7 +48,7 @@ send.onclick = function send_comment() {
       text = comment.value;
       text = text.trim();
       if (text != ""){
-          xml.open("POST", "../php/sand_comment.php", true);
+          xml.open("POST", "sand_comment", true);
           xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
           xml.send("src=" + main_src + "&text=" + text);
       }
@@ -58,7 +58,7 @@ send.onclick = function send_comment() {
 
 function get_coment() {
     comment_list.innerHTML = '';
-    xml.open("POST", "../php/get_coment.php", true);
+    xml.open("POST", "get_coment", true);
     xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xml.send("src=" + main_src);
     xml.onreadystatechange = function () {
@@ -67,11 +67,9 @@ function get_coment() {
             coment_arr = coment_arr.split("±@±");
             p_like.innerHTML = coment_arr[0];
             for(var i = 1; i < coment_arr.length; i += 2 ){
-
                 var p = document.createElement("p"),
                     div = document.createElement("textarea"),
                     hr = document.createElement("hr");
-
                 p.innerHTML =  coment_arr[i + 1] + ":";
                 p.style.color = "red";
                 p.classList.add('lolo');

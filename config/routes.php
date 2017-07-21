@@ -34,6 +34,9 @@ return array(
 
     'camagru/img_plus_img' => 'gallery/img_plus_img',
     'camagru/delete_from_gallery' => 'gallery/delete_from_gallery',
+    'camagru/mk_like' => 'gallery/make_like',
+    'camagru/sand_comment' => 'gallery/sand_comment',
+    'camagru/get_coment' => 'gallery/get_coment',
 
     'camagru/loged_user' => 'account/loged_user',
     'camagru/check_singup' => 'account/singup_valid',

@@ -24,4 +24,21 @@ class GalleryController
         }
         return true;
     }
+
+    public static function actionMake_like(){
+        $login = $_SESSION['logged_user'];
+        galleryModel::MakeLike($login, $_POST['src']);
+        return true;
+    }
+
+    public static function actionSand_comment(){
+        $login = $_SESSION['logged_user'];
+        galleryModel::SendComment($login, $_POST['src'], $_POST['text']);
+        return true;
+    }
+
+    public static function actionGet_coment(){
+        galleryModel::GetComment($_POST['src']);
+        return true;
+    }
 }

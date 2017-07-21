@@ -59,9 +59,8 @@ class galleryModel
         echo $array;
     }
 
-    public static function GetComment(){
+    public static function GetComment($src){
         $pdo = Db::getConnection();
-        $src = $_POST['src'];
         $src = explode("gallery/", $src);
         $src = $src[1];
         $activ1 = "SELECT users_comented, coments FROM `coment_g` WHERE img_src = '$src'";
@@ -79,10 +78,8 @@ class galleryModel
         echo $text;
     }
 
-    public static function MakeLike(){
+    public static function MakeLike($login, $src){
         $pdo = Db::getConnection();
-        $src = $_POST['src'];
-        $login = $_SESSION['logged_user'];
         $src = explode("gallery/", $src);
         $src = $src[1];
         $activ1 = "SELECT id FROM `user` WHERE login = '$login'";
@@ -144,13 +141,18 @@ class galleryModel
             echo "-1";
     }
 
-    public static function SendComment(){
+    public function send_mail_coment($login, $email)
+    {
+        $subject = "Camagru: Ваше фото прокоментували";
+        $message = "Добрий день!  ".$login." прокоментував вашу фотографію\n\n
+                З повагою адміністратор, власник і всемогутній куратор сайта Camagru";
+        mail($email, $subject, $message);
+    }
+
+    public static function SendComment($login, $src, $text){
         $pdo = Db::getConnection();
-        $src = $_POST['src'];
-        $login = $_SESSION['logged_user'];
         $src = explode("gallery/", $src);
         $src = $src[1];
-        $text = $_POST['text'];
         $activ1 = "SELECT id FROM `user` WHERE login = '$login'";
         $result1 = $pdo->prepare($activ1);
         $result1->execute();
@@ -176,7 +178,7 @@ class galleryModel
             $activation1 = $result1->fetch(PDO::FETCH_ASSOC);
             $email_login_user = $activation1['email'];
             if ($email != $email_login_user){
-                send_mail_coment($login, $email_login_user);
+                galleryModel::send_mail_coment($login, $email_login_user);
             }
         }
     }

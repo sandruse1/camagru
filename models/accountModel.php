@@ -160,14 +160,6 @@ class accountModel
         mail($email, $subject, $message, $headers);
     }
 
-    public static function send_mail_coment($login, $email)
-    {
-        $subject = "Camagru: Ваше фото прокоментували";
-        $message = "Добрий день!  ".$login." прокоментував вашу фотографію\n\n
-                З повагою адміністратор, власник і всемогутній куратор сайта Camagru";
-        mail($email, $subject, $message);
-    }
-
     public static function LoginOfUser(){
         session_start();
         if (isset($_SESSION['logged_user'])) {
