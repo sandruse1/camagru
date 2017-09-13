@@ -24,6 +24,7 @@ class accountModel
         }
         session_start();
         $_SESSION['logged_user'] = $login;
+
     }
 
     public static function check_data_singup($login, $passwd, $conf_passwd, $email){

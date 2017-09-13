@@ -302,7 +302,9 @@ div#delete_from_g{
 #save_to_g{
     display: none;
 }
-
+#upload_photo{
+    display: none;
+}
 #groop p{
     font-size: 20px;
 }

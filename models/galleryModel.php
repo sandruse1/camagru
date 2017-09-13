@@ -8,11 +8,41 @@
  */
 class galleryModel
 {
+
+    public  function resizePng($im, $dst_width, $dst_height) {
+        $width = imagesx($im);
+        $height = imagesy($im);
+        $newImg = imagecreatetruecolor($dst_width, $dst_height);
+        imagealphablending($newImg, false);
+        imagesavealpha($newImg, true);
+        $transparent = imagecolorallocatealpha($newImg, 255, 255, 255, 127);
+        imagefilledrectangle($newImg, 0, 0, $width, $height, $transparent);
+        imagecopyresampled($newImg, $im, 0, 0, 0, 0, $dst_width, $dst_height, $width, $height);
+        return $newImg;
+    }
+
     public static function ImgPlusImg($img, $login, $frame){
         $pdo = Db::getConnection();
+        if ($img != "./gallery/".$login.".png"){
         $img = str_replace('data:image/png;base64,', '', $img);
         $img = str_replace(' ', '+', $img);
         $data = base64_decode($img);
+        }
+        else{
+$k = 1;
+            $data = ImageCreateFromPNG("./gallery/".$login.".png");
+            $dst_width = 400;
+            $dst_height = 400;
+            $width = imagesx($data);
+            $height = imagesy($data);
+            $newImg = imagecreatetruecolor($dst_width, $dst_height);
+            imagealphablending($newImg, false);
+            imagesavealpha($newImg, true);
+            $transparent = imagecolorallocatealpha($newImg, 255, 255, 255, 127);
+            imagefilledrectangle($newImg, 0, 0, $width, $height, $transparent);
+            imagecopyresampled($newImg, $data, 0, 0, 0, 0, $dst_width, $dst_height, $width, $height);
+$data = $newImg;
+        }
         $sql = "INSERT INTO `gallery` (user_name) VALUES (?)";
         $result = $pdo->prepare($sql);
         $result->execute([$login]);
@@ -24,7 +54,11 @@ class galleryModel
         $activ = "UPDATE `gallery` SET img_src = './gallery/$n.png' WHERE id = '$n'";
         $result = $pdo->prepare($activ);
         $result->execute();
-        file_put_contents("./gallery/$n.png", $data);
+        if ($k != 1) {
+            file_put_contents("./gallery/$n.png", $data);
+        }else{
+            imagepng($data, "./gallery/$n.png");
+        }
         $Image = ImageCreateFromPNG("./gallery/$n.png");
         $logo = ImageCreateFromPNG("./img/frame/$frame");
         if ($frame == "frame1.png")
@@ -34,6 +68,7 @@ class galleryModel
         elseif ($frame == "girl.png")
             ImageCopy($Image, $logo, 0, 0, 0, 0, 200, 400);
         imagepng($Image, "./gallery/$n.png");
+//        if ($k){ unlink("./gallery/".$login.".png");}
         echo "./gallery/$n.png";
     }
 
@@ -185,13 +220,15 @@ class galleryModel
 
     public static function UploadPhoto(){
         session_start();
-        $login = $_SESSION['logged_user'];
+
+
+        $login = $_SESSION['loged_user'];
         if(!empty($_FILES['photo_file']['tmp_name'])){
             if(!empty($_FILES['photo_file']['error'])){
-                header("Location: ../html/main.html?error=2"); // помилка загрузки
+                header("Location: http://localhost:8080/camagru/main?error=2"); // помилка загрузки
             }
             elseif ($_FILES['photo_file']['size'] > 2*1024*1024){
-                header("Location: ../html/main.html?error=3"); ///файл завеликий
+                header("Location: http://localhost:8080/camagru/main?error=3"); ///файл завеликий
             }
             switch ($_FILES['photo_file']['type']){
                 case 'image/png';
@@ -199,14 +236,14 @@ class galleryModel
                     $type = 'png';
                     break;
                 default:
-                    header("Location: ../html/main.html?error=4"); //неправильний формат файла
+                    header("Location: http://localhost:8080/camagru/main?error=4"); //неправильний формат файла
             }
-            if(!move_uploaded_file($_FILES['photo_file']['tmp_name'], "../gallery/$login.$type")){
-                header("Location: ../html/main.html?error=5"); //не вдалось загрузити файл
+            if(!move_uploaded_file($_FILES['photo_file']['tmp_name'], "./gallery/$login.png")){
+                header("Location: http://localhost:8080/camagru/main?error=5"); //не вдалось загрузити файл
             }
-            header("Location: ../html/main.html"); //все добре
+            header("Location: http://localhost:8080/camagru/main"); //все добре
         }
         else
-            header("Location: ../html/main.html?error=1"); //ви не вибрали файл
+            header("Location: http://localhost:8080/camagru/main?error=1"); //ви не вибрали файл
     }
 }

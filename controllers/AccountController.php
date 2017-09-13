@@ -22,7 +22,7 @@ class AccountController
     public function actionActivate_account($login, $act)
     {
         accountModel::userActivation($act, $login);
-        require_once(ROOT.'/views/site/viewMain.php');
+        header('Location: http://localhost:8080/camagru/main');
         return true;
     }
 

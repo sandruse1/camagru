@@ -18,7 +18,9 @@ var form = document.getElementById("menu"),
     do_no_g = document.getElementById('no_g'),
     photo_div = document.getElementById('photo_div'),
     what_frame,
+    photo_upload_success = document.getElementById('photo_upload_success'),
     make_photo = document.getElementById('capture'),
+    upload_photo = document.getElementById('upload_photo'),
     load_photo = document.getElementById('load_photo'),
     user_g = document.getElementById('user_g'),
     src_to_delete,
@@ -38,7 +40,7 @@ xxx.send();
 xxx.onreadystatechange = function () {
     if (xxx.readyState == 4 && xxx.status == 200) {
         var result = xxx.responseText;
-        console.log(result);
+
         if (result != "!!!PPP") {
             login = result;
             input.className = "error";
@@ -83,6 +85,28 @@ function stream_go() {
     context.scale(-1, 1);
 }
 
+photo_upload_success.onclick = function () {
+
+
+    xmlhttp.open("POST", "http://localhost:8080/camagru/img_plus_img", true);
+    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xmlhttp.send("sr=" + './gallery/' + login + '.png' + "&user_name=" + login + "&fr_src=" + what_frame);
+
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var result = xmlhttp.responseText;
+            var div = document.getElementById("user_g");
+            var img = document.createElement("img")
+            img.setAttribute('src', result);
+            img.setAttribute('onclick', "delete_img(this.src)");
+            div.insertBefore(img, div.firstChild);
+            to_none();
+            location.href= ' http://localhost:8080/camagru/main';
+        }
+    };
+}
+
+
 make_photo.onclick = function()
 {
 
@@ -111,27 +135,16 @@ do_yes.onclick = function ()
             img.setAttribute('onclick', "delete_img(this.src)");
             div.insertBefore(img, div.firstChild);
             to_none();
+            location.href= ' http://localhost:8080/camagru/main';
         }
     };
 }
 
-// load_photo.onclick = function() {
-//     console.log("ddd");
-//     var xmlhttp = new XMLHttpRequest();
-//     xmlhttp.open("POST", "../php/../php/upload.php", true);
-//     xmlhttp.setRequestHeader("Content-Type", "multipart/form-data");
-//     xmlhttp.send("sr=1");
-//     xmlhttp.onreadystatechange = function () {
-//         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-//             var result = xmlhttp.responseText;
-//             console.log(result);
-//         }
-//     };
-// }
 
 function to_none() {
     photo_frame.style.display = "none";
     make_photo.style.display = "block";
+    upload_photo.style.display = "block";
     load_photo.style.display = "block";
     photo.src = "./img/css_img/sandruse.png";
     photo_div.className = "none";

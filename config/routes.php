@@ -37,6 +37,8 @@ return array(
     'camagru/mk_like' => 'gallery/make_like',
     'camagru/sand_comment' => 'gallery/sand_comment',
     'camagru/get_coment' => 'gallery/get_coment',
+    'camagru/upload_img' => 'gallery/upload_img',
+
 
     'camagru/loged_user' => 'account/loged_user',
     'camagru/check_singup' => 'account/singup_valid',

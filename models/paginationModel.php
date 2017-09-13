@@ -29,6 +29,10 @@ class paginationModel
     }
 
     function try_get($get, $count_pages){
+
+        $help = explode('=', $get);
+        $get = $help['1'];
+
         if(isset($get)){
             $page = (int)$get;
             if ($page < 1) $page = 1;

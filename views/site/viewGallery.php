@@ -4,7 +4,8 @@
 //$images = get_img($dir);
 //require_once 'pagination.php';
 include_once(ROOT . '/models/paginationModel.php');
-$tmp = new paginationModel($_GET);
+
+$tmp = new paginationModel($_SESSION);
 ?>
 
 <!doctype html>
@@ -19,14 +20,15 @@ $tmp = new paginationModel($_GET);
     <div class="p"><p>GALLERY</p></div>
     <div class="menu">
         <div id="menu">
-            <input type="submit" name="back" value="<< Back"/>
-            <input type="submit" name="exit" value="Exit"/>
+            <input type="submit" onclick="location.href = 'http://localhost:8080/camagru/main'" name="back" value="<< Back"/>
+            <input type="submit" onclick="location.href = 'http://localhost:8080/camagru/exit'" name="exit" value="Exit"/>
         </div>
     </div>
     <div class="hr">
         <hr>
     </div>
 </div>
+
 <div class="main">
     <div class="wrapper">
         <div class="gallery">

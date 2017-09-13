@@ -32,12 +32,13 @@ function show_hidden(src) {
 
 like.onclick = function make_like() {
 
-    xml.open("POST", "make_like", true);
+    xml.open("POST", "http://localhost:8080/camagru/mk_like", true);
     xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xml.send("src=" + main_src);
     xml.onreadystatechange = function () {
         if (xml.readyState == 4 && xml.status == 200) {
             likes_numb = xml.responseText;
+            console.log(likes_numb);
             if (likes_numb != -1)
                 p_like.innerHTML = likes_numb;
         }

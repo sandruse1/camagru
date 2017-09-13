@@ -35,7 +35,7 @@
             <div class="else">
                 <a href="#" id="capture" class="booth-capture-button"  methods="POST">Take photo</a>
 
-                <form enctype="multipart/form-data" method="post" action="../php/upload.php" >
+                <form id="upload_photo" enctype="multipart/form-data" method="post" action="/camagru/upload_img" >
                     <div  class="file-upload">
                         <label>
                             <input type="file" name="photo_file">
@@ -44,7 +44,7 @@
                     </div>
                     <div id="load_photo" class="file-upload">
                         <label>
-                            <input type="submit" name="Download">
+                            <input id="photo_upload_success"  type="submit" name="Download">
                             <span>Загрузити фото</span>
                         </label>
                     </div>

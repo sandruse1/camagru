@@ -26,19 +26,27 @@ class GalleryController
     }
 
     public static function actionMake_like(){
+        session_start();
         $login = $_SESSION['logged_user'];
         galleryModel::MakeLike($login, $_POST['src']);
         return true;
     }
 
     public static function actionSand_comment(){
+        session_start();
         $login = $_SESSION['logged_user'];
+
         galleryModel::SendComment($login, $_POST['src'], $_POST['text']);
         return true;
     }
 
     public static function actionGet_coment(){
         galleryModel::GetComment($_POST['src']);
+        return true;
+    }
+
+    public static function actionUpload_img(){
+        galleryModel::UploadPhoto();
         return true;
     }
 }

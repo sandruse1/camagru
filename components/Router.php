@@ -30,6 +30,13 @@ class Router
                 $controllerName = ucfirst(array_shift($segment)) . 'Controller';
 
                 $actionName = 'action' . ucfirst(array_shift($segment));
+                $help = explode('?', $actionName);
+                $actionName = $help[0];
+                session_start();
+                if (array_key_exists('1', $help)){
+                    $_SESSION['page'] = $help[1];
+                }
+
 
                 $parameters = $segment;
                 $controllerFile = ROOT.'/controllers/'.$controllerName.'.php';
